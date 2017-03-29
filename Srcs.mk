@@ -6,7 +6,7 @@
 #    By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/19 07:58:53 by mgautier          #+#    #+#              #
-#*   Updated: 2017/03/29 15:18:00 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/03/29 17:19:05 by mgautier         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ TEST_DIR := test
 
 # Dependencies
 
-LIBRARY := 
+LIBRARY := libft
 OBJECTS :=
 ELSE :=
 
