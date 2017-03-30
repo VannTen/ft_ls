@@ -6,11 +6,11 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 15:39:42 by mgautier          #+#    #+#             */
-/*   Updated: 2017/03/30 17:02:08 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/03/30 17:23:11 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "options_interface.h"
+#include "options_defs.h"
 #include "unix_usage_interface.h"
 #include "parameters_defs.h"
 

@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_one_options.c                                  :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/30 16:39:41 by mgautier          #+#    #+#             */
-/*   Updated: 2017/03/30 17:30:58 by mgautier         ###   ########.fr       */
+/*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
+/*   Updated: 2017/03/30 18:22:26 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parameters_interface.h"
 #include "libft.h"
+#include "options_interface.h"
 
-void	set_all_files(t_bool *opt_array)
+int main(int argc,const char **argv)
 {
-	opt_array[ALL_FILES] = TRUE;
-}
+	t_bool *options;
 
-void	set_long_format(t_bool *opt_array)
-{
-	opt_array[LONG_FORMAT] = TRUE;
-}
-
-void	set_reverse_order(t_bool *opt_array)
-{
-	opt_array[REVERSE_ORDER] = TRUE;
-}
-
-void	set_recursive(t_bool *opt_array)
-{
-	opt_array[RECURSIVE] = TRUE;
-}
-
-void	set_modif_time_sort(t_bool *opt_array)
-{
-	opt_array[SORT_BY_MODIF_TIME] = TRUE;
+	if (argc > 1)
+		set_options(argv + 1, &options);
+	if (options[0])
+		return (1);
+	return (0);
 }
