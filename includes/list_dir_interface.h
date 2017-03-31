@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   list_dir_interface.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/03/31 17:47:21 by mgautier         ###   ########.fr       */
+/*   Created: 2017/03/31 17:45:56 by mgautier          #+#    #+#             */
+/*   Updated: 2017/03/31 18:48:51 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list_dir_interface.h"
-#include "dir_entry_interface.h"
-#include "libft.h"
-#include "options_interface.h"
-#include <sys/types.h>
-#include <sys/dir.h>
+#ifndef LIST_DIR_INTERFACE_H
+# define LIST_DIR_INTERFACE_H
+# include "libft.h"
+# include <sys/types.h>
+# include <sys/dir.h>
 
-int main(void)
-{
-	DIR *dir = opendir(".");
-	list_dir(dir, &comp_alpha);
+void	list_dir(DIR *directory, t_compare comp_ft);
 
-	return (0);
-}
+#endif
