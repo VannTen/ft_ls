@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/03 14:00:07 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/03 14:27:05 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	list_sub_dirs(char *parent_path, int path_len, t_fifo *subdirs_list,
 	while (dir_name != NULL)
 	{
 		dir_path = ft_strcpy(parent_path + path_len, dir_name);
-		list_dir(parent_path, ft_strlen(dir_name), comp_ft);
+		list_dir(parent_path, path_len + ft_strlen(dir_name), comp_ft);
 		ft_strclr(parent_path + path_len);
 		ft_strdel(&dir_name);
 		dir_name = f_fifo_take(subdirs_list);
