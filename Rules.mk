@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/12/13 19:41:31 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/04/03 15:13:31 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/04/03 15:36:31 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -33,7 +33,10 @@ include $(DIR)Srcs.mk
 
 # Inclusion of subdirs Rules.mk
 
+$(foreach SUBDIR,$(addsuffix /,$(LIBRARY)),$(eval $(INCLUDE_SUBDIRS)))
 $(foreach SUBDIR,$(addsuffix /,$(SUBDIRS)),$(eval $(INCLUDE_SUBDIRS)))
+$(foreach VARIABLE,$(EMPTY_SRCS.MK),$(eval $(VARIABLE):= ))
+include $(DIR)Srcs.mk
 $(TARGET): LIB_INCLUDES := $(LIBRARY)
 
 # Give the full path to the locals directories (by appending DIR before them)
@@ -67,7 +70,7 @@ DEP_$(DIR) := $(DEP)
 
 ifdef TARGET
 TARGET_$(DIR) := $(DIR)$(BUILD_PREFIX)$(TARGET)
-vpath $(TARGET_$(DIR)) $(DIR)
+vpath $(TARGET) $(DIR)
 $(basename $(TARGET))_PATH := $(DIR)
 else
 $(eval $(TARGET_ERROR))
@@ -88,7 +91,7 @@ endif
 
 # Local rules
 
-$(TARGET_$(DIR)): $(OBJ_$(DIR)) $(ELSE) $(patsubst lib%,-l$(BUILD_PREFIX)%,$(LIBRARIES))
+$(TARGET_$(DIR)): $(OBJ_$(DIR)) $(ELSE) $(patsubst lib%,-l$(BUILD_PREFIX)%,$(LIBRARY))
 	$(QUIET) $(RECIPE)
 
 $(eval $(STATIC_OBJ_RULE))
