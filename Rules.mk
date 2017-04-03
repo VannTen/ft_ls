@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2016/12/13 19:41:31 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/01/25 15:35:09 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/04/03 15:13:31 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -23,13 +23,18 @@ DIR_$(STACK_POINTER) := $(DIR)
 DIR := $(DIR)$(SUBDIR)
 
 $(info Begin parsing $(DIR)Rules.mk)
-# Inlcudes Srcs.mk, which defines directory data (source files, target name,
+# Includes Srcs.mk, which defines directory data (source files, target name,
 # additional dependencies, libraries needed)
 # Clean variables before, so we dont catch some from a previous dir
 # if there is a problem with Srcs.mk
 
 $(foreach VARIABLE,$(EMPTY_SRCS.MK),$(eval $(VARIABLE):= ))
 include $(DIR)Srcs.mk
+
+# Inclusion of subdirs Rules.mk
+
+$(foreach SUBDIR,$(addsuffix /,$(SUBDIRS)),$(eval $(INCLUDE_SUBDIRS)))
+$(TARGET): LIB_INCLUDES := $(LIBRARY)
 
 # Give the full path to the locals directories (by appending DIR before them)
 # add a slash only if necessary
@@ -118,10 +123,6 @@ endif
 # Inclusion of depency files (auto-generated)
 
 DEP_FILES+= $(DEP_$(DIR))
-
-# Inclusion of subdirs Rules.mk
-
-$(foreach SUBDIR,$(addsuffix /,$(SUBDIRS)),$(eval $(INCLUDE_SUBDIRS)))
 
 # Tracking current directory
 
