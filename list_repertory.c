@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/03 14:27:05 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/03 14:51:25 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_btree	*get_sorted_dir_entries(DIR *directory, t_compare comp_ft)
 	return (dir_entries);
 }
 
-t_fifo	*list_one_dir(DIR* directory, t_compare comp_ft)
+t_fifo	*list_one_dir(DIR *directory, t_compare comp_ft)
 {
 	t_btree	*sorted_entries;
 	t_fifo	*sub_dirs_list;
@@ -53,7 +53,6 @@ t_fifo	*list_one_dir(DIR* directory, t_compare comp_ft)
 				sub_dirs_list);
 	}
 	btree_destroy(&sorted_entries, &no_destroy);
-
 	return (sub_dirs_list);
 }
 
@@ -98,4 +97,3 @@ void	list_dir(char *name, int path_len, t_compare comp_ft)
 	else
 		perror(NULL);
 }
-
