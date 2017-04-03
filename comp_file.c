@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:03:15 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/03 17:09:46 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/03 18:26:39 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,14 @@ int		comp_time(void *entry_1, void *entry_2)
 
 	file_1 = entry_1;
 	file_2 = entry_2;
-	if (file_1->file_infos.st_mtime < file_2->file_infos.st_mtime)
+	if (file_1->file_infos.st_mtime > file_2->file_infos.st_mtime)
+		return (-1);
+	else if (file_1->file_infos.st_mtime < file_2->file_infos.st_mtime)
+		return (1);
+	else if (ft_strcmp(
+				file_1->dir_entry->d_name, file_2->dir_entry->d_name) > 0)
 		return (1);
 	else
 		return (-1);
+
 }
