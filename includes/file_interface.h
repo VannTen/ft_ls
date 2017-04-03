@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/03 17:23:36 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/03 17:44:15 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		comp_time(void *entry_1, void *entry_2);
 ** on the options which are set
 */
 
-void	*get_dir_entry(DIR *dir);
+void	*get_dir_entry(DIR *dir, char *parent_path, int path_len);
 void	*get_stat_dir(DIR *dir, char *parent_path, int path_len);
 
 #endif
