@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:04 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/03 11:31:23 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/03 13:48:06 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	do_something_with_it(void *entry, void *list_dir)
 
 	file = entry;
 	ft_putendl(file->d_name);
-	if (file->d_type == DT_DIR)
+	if (file->d_type == DT_DIR &&
+			(ft_strcmp(".", file->d_name) != 0 &&
+			 ft_strcmp("..", file->d_name) != 0))
 	{
 		dir_name = ft_strdup(file->d_name);
 		f_fifo_add(list_dir, dir_name);
