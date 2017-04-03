@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   list_dir_interface.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/03 17:47:04 by mgautier         ###   ########.fr       */
+/*   Created: 2017/03/31 17:45:56 by mgautier          #+#    #+#             */
+/*   Updated: 2017/04/03 13:22:27 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list_dir_interface.h"
-#include "file_interface.h"
-#include "libft.h"
-#include "options_interface.h"
-#include <sys/types.h>
-#include <sys/dir.h>
-#include <sys/ucred.h>
+#ifndef LIST_DIR_INTERFACE_H
+# define LIST_DIR_INTERFACE_H
+# include "libft.h"
+# include <sys/types.h>
+# include <sys/dir.h>
 
-int main(void)
-{
-	char path[1024];
+void	list_dir(char *name, int path_len, t_compare comp_ft);
 
-	ft_strcpy(path, ".");
-	list_dir(path, ft_strlen("."), &comp_time);
-
-	return (0);
-}
+#endif
