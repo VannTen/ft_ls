@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:04 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/03 18:25:57 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/03 18:42:44 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*get_stat_dir(DIR *dir, char *parent_path, int path_len)
 	parent_path[path_len] = '/';
 	path_len++;
 	ft_strcpy(parent_path + path_len, file->dir_entry->d_name);
-	stat(parent_path, &file->file_infos);
+	lstat(parent_path, &file->file_infos);
 	path_len--;
 	ft_strclr(parent_path + path_len);
 	return (file);
