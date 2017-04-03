@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:34:12 by mgautier          #+#    #+#             */
-/*   Updated: 2017/03/31 17:39:13 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/03 11:31:58 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/dir.h>
 
 void	*get_dir_entry(DIR *dir);
-void	do_something_with_it(void *entry);
+void	do_something_with_it(void *entry, void *list_repertory);
 int		comp_alpha(void *entry_1, void *entry_2);
 
 #endif

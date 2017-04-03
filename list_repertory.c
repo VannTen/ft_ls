@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/03/31 17:41:14 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/03 11:33:17 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,22 @@ void	list_dir(DIR *directory, t_compare comp_ft)
 {
 	t_btree	*sorted_entries;
 	t_fifo	*sub_dirs_list;
-	DIR		*current_sub_dir;
+	char	*current_sub_dir;
 
 	sub_dirs_list = f_fifo_create();
 	sorted_entries = get_sorted_dir_entries(directory, comp_ft);
 	if (sub_dirs_list != NULL && sorted_entries != NULL)
 	{
-		btree_iter_in_order(sorted_entries, &do_something_with_it);
+		btree_iter_two_param_in_order(sorted_entries, &do_something_with_it,
+				sub_dirs_list);
 		btree_destroy(&sorted_entries, &no_destroy);
 		current_sub_dir = f_fifo_take(sub_dirs_list);
+		ft_putendl("Begin dir_list");
 		while (current_sub_dir != NULL)
 		{
-			list_dir(current_sub_dir, comp_ft);
+	//		list_dir(current_sub_dir, comp_ft);
 			current_sub_dir = f_fifo_take(sub_dirs_list);
+			ft_putendl(current_sub_dir);
 		}
 	}
 	f_fifo_destroy(&sub_dirs_list, &no_destroy);
