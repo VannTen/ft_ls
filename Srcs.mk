@@ -6,7 +6,7 @@
 #    By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/19 07:58:53 by mgautier          #+#    #+#              #
-#*   Updated: 2017/03/31 11:33:10 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/04/03 14:58:55 by mgautier         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ TARGET := ft_ls
 
 SRC :=\
 	list_repertory.c\
+	get_file.c\
 	set_options.c\
+	set_one_options.c\
 	main.c
 # Directories
 
