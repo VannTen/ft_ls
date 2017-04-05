@@ -6,7 +6,7 @@
 #    By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/19 07:58:53 by mgautier          #+#    #+#              #
-#*   Updated: 2017/04/03 16:06:14 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/04/05 14:45:01 by mgautier         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC :=\
 	get_file.c\
 	comp_file.c\
 	treat_file.c\
+	file_mode_and_perms.c\
 	main.c
 #	set_options.c\
 #	set_one_options.c\

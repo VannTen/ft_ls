@@ -6,14 +6,25 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:02:53 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/03 17:13:35 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/05 14:53:22 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "mode_and_perms_interface.h"
 #include "file_defs.h"
 #include "libft.h"
+#include <sys/stat.h>
 #include <dirent.h>
 
+
+void	print_long_format(struct s_file *file)
+{
+	char file_mode[MODE_ARRAY_SIZE + 1];
+	fill_mode_field(file_mode, file->file_infos.st_mode);
+	ft_putstr(file_mode);
+	ft_putstr(" ");
+	ft_putendl(file->dir_entry->d_name);
+}
 void	do_something_with_it(void *entry, void *list_dir)
 {
 	struct dirent	*file;
@@ -36,7 +47,7 @@ void	do_something_with_it_2(void *entry, void *list_dir)
 	char			*dir_name;
 
 	file = entry;
-	ft_putendl(file->dir_entry->d_name);
+	print_long_format(file);
 	if (file->dir_entry->d_type == DT_DIR &&
 			(ft_strcmp(".", file->dir_entry->d_name) != 0 &&
 			ft_strcmp("..", file->dir_entry->d_name) != 0))
