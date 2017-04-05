@@ -6,24 +6,63 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:02:53 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/05 14:53:22 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/05 17:16:11 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mode_and_perms_interface.h"
 #include "file_defs.h"
 #include "libft.h"
+#include <grp.h>
+#include <pwd.h>
+#include <uuid/uuid.h>
+#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/syslimits.h>
 #include <dirent.h>
+#include <time.h>
 
+/*
+** That function allow to skip first word in the return of ctime, which is
+** day of the week, and skip the end (seconds and year)
+*/
+
+char	*adjust_time(char *std_time)
+{
+	char	*start;
+	int		index;
+
+	index = 0;
+	while (std_time[index] != ' ')
+		index++;
+	index++;
+	start = std_time + index;
+	while (std_time[index] != ':')
+		index++;
+	std_time[index + 3] = '\0';
+	return (start);
+}
 
 void	print_long_format(struct s_file *file)
 {
-	char file_mode[MODE_ARRAY_SIZE + 1];
+	char			file_mode[MODE_ARRAY_SIZE + 1];
+	struct passwd	*user;
+	struct group	*group;
+	char			*time;
+	char			link_path[PATH_MAX];
+
 	fill_mode_field(file_mode, file->file_infos.st_mode);
-	ft_putstr(file_mode);
-	ft_putstr(" ");
-	ft_putendl(file->dir_entry->d_name);
+	user = getpwuid(file->file_infos.st_uid);
+	group = getgrgid(file->file_infos.st_gid);
+	time = adjust_time(ctime(&file->file_infos.st_mtime));
+	ft_printf("%s%4d %s %s %7lld %s %s\n",
+			file_mode,
+			file->file_infos.st_nlink,
+			user->pw_name,
+			group->gr_name,
+			file->file_infos.st_size,
+			time,
+			file->dir_entry->d_name);
 }
 void	do_something_with_it(void *entry, void *list_dir)
 {
