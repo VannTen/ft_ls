@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   path_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/05 17:01:22 by mgautier         ###   ########.fr       */
+/*   Created: 2017/04/05 17:40:12 by mgautier          #+#    #+#             */
+/*   Updated: 2017/04/05 18:08:15 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list_dir_interface.h"
-#include "file_interface.h"
 #include "libft.h"
-#include "options_interface.h"
-#include <sys/types.h>
-#include <sys/dir.h>
-#include <sys/ucred.h>
-#include <sys/syslimits.h>
 
-int main(void)
+void	set_file_path(char *parent_path, int path_len, const char *file_name)
 {
-	char path[PATH_MAX];
+	parent_path[path_len] = '/';
+	path_len++;
+	ft_strcpy(parent_path + path_len, file_name);
+}
 
-	ft_strcpy(path, ".");
-	list_dir(path, ft_strlen("."), &comp_alpha);
-
-	return (0);
+void	restore_path(char *parent_path, int path_len)
+{
+	ft_strclr(parent_path + path_len);
 }

@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   path_tools_interface.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/05 17:01:22 by mgautier         ###   ########.fr       */
+/*   Created: 2017/04/05 17:52:22 by mgautier          #+#    #+#             */
+/*   Updated: 2017/04/05 17:56:46 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list_dir_interface.h"
-#include "file_interface.h"
-#include "libft.h"
-#include "options_interface.h"
-#include <sys/types.h>
-#include <sys/dir.h>
-#include <sys/ucred.h>
-#include <sys/syslimits.h>
+#ifndef PATH_TOOLS_INTERFACE_H
+# define PATH_TOOLS_INTERFACE_H
 
-int main(void)
-{
-	char path[PATH_MAX];
+void	set_file_path(char *parent_path, int path_len, const char *file_name);
+void	restore_path(char *parent_path, int path_len);
 
-	ft_strcpy(path, ".");
-	list_dir(path, ft_strlen("."), &comp_alpha);
-
-	return (0);
-}
+#endif

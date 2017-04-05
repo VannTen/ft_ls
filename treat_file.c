@@ -6,13 +6,14 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:02:53 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/05 17:16:11 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/05 18:27:09 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mode_and_perms_interface.h"
 #include "file_defs.h"
 #include "libft.h"
+#include "path_tools_interface.h"
 #include <grp.h>
 #include <pwd.h>
 #include <uuid/uuid.h>
@@ -50,19 +51,33 @@ void	print_long_format(struct s_file *file)
 	struct group	*group;
 	char			*time;
 	char			link_path[PATH_MAX];
+	char			*format_string;
 
 	fill_mode_field(file_mode, file->file_infos.st_mode);
 	user = getpwuid(file->file_infos.st_uid);
 	group = getgrgid(file->file_infos.st_gid);
 	time = adjust_time(ctime(&file->file_infos.st_mtime));
-	ft_printf("%s%4d %s %s %7lld %s %s\n",
+	if (file_mode[0] == 'l')
+	{
+	set_file_path(file->parent_path, file->path_len, file->dir_entry->d_name);
+	link_path[readlink(file->parent_path, link_path, PATH_MAX)] = '\0';
+	restore_path(file->parent_path, file->path_len);
+	format_string = "%s%4d %s %s %7lld %s %s -> %s\n";
+	}
+	else
+	{
+		link_path[0] = '\0';
+		format_string = "%s%4d %s %s %7lld %s %s\n";
+	}
+	ft_printf(format_string,
 			file_mode,
 			file->file_infos.st_nlink,
 			user->pw_name,
 			group->gr_name,
 			file->file_infos.st_size,
 			time,
-			file->dir_entry->d_name);
+			file->dir_entry->d_name,
+			link_path);
 }
 void	do_something_with_it(void *entry, void *list_dir)
 {
