@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/06 14:46:12 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/06 14:57:38 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_fifo	*list_one_dir(DIR *directory, t_compare comp_ft,
 	sub_dirs_list = f_fifo_create();
 	if (sub_dirs_list != NULL && sorted_entries != NULL)
 	{
+		ft_printf("total %d\n", btree_sum(sorted_entries, &get_block_nbr));
 		btree_iter_two_param_in_order(sorted_entries, &do_something_with_it_2,
 				sub_dirs_list);
 	}

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:02:53 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/06 14:47:51 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/06 17:52:04 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,12 @@ void	do_something_with_it_2(void *entry, void *list_dir)
 		dir_name = ft_strdup(file->dir_entry->d_name);
 		f_fifo_add(list_dir, dir_name);
 	}
+}
+
+int		get_block_nbr(void *file)
+{
+	struct s_file	*s_file;
+
+	s_file = file;
+	return (s_file->file_infos.st_blocks);
 }

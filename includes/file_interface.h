@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/03 17:44:15 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/06 17:52:29 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 void	do_something_with_it(void *entry, void *list_dir);
 void	do_something_with_it_2(void *entry, void *list_dir);
+int		get_block_nbr(void *file);
 
 /*
 ** Comparison functions
