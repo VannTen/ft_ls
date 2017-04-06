@@ -6,25 +6,28 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/05 17:01:22 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/06 18:55:49 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list_dir_interface.h"
 #include "file_interface.h"
-#include "libft.h"
 #include "options_interface.h"
+#include "parameters_interface.h"
+#include "libft.h"
 #include <sys/types.h>
 #include <sys/dir.h>
 #include <sys/ucred.h>
 #include <sys/syslimits.h>
 
-int main(void)
+int main(int argc, char **argv)
 {
 	char path[PATH_MAX];
+	t_ls_param	*params;
 
+	params = settle_param(argc, argv);
 	ft_strcpy(path, ".");
-	list_dir(path, ft_strlen("."), &comp_alpha);
+	list_dir(path, ft_strlen("."), params);
 
 	return (0);
 }
