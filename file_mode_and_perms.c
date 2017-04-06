@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 13:36:23 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/05 15:18:04 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/06 14:50:29 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 
 char	read_permission(mode_t mode, enum e_perm_category perm_category)
 {
-	const mode_t read_perm[] =
-	{
+	const mode_t	read_perm[] = {
 		S_IRUSR,
 		S_IRGRP,
 		S_IROTH
 	};
-	int index;
+	int				index;
 
 	index = 0;
 	while (index < PERM_CAT_NBR)
@@ -36,13 +35,12 @@ char	read_permission(mode_t mode, enum e_perm_category perm_category)
 
 char	write_permission(mode_t mode, enum e_perm_category perm_category)
 {
-	const mode_t write_perm[] =
-	{
+	const mode_t	write_perm[] = {
 		S_IWUSR,
 		S_IWGRP,
 		S_IWOTH
 	};
-	int index;
+	int				index;
 
 	index = 0;
 	while (index < PERM_CAT_NBR)
@@ -56,13 +54,13 @@ char	write_permission(mode_t mode, enum e_perm_category perm_category)
 
 char	execution_permission(mode_t mode, enum e_perm_category perm_category)
 {
-	const mode_t exec_perm[] = {S_IXUSR, S_IXGRP, S_IXOTH};
+	const mode_t	exec_perm[] = {S_IXUSR, S_IXGRP, S_IXOTH};
 
 	if ((mode & exec_perm[perm_category]) == exec_perm[perm_category])
 	{
 		if ((perm_category == OWNER && (mode & S_ISUID) == S_ISUID) ||
 				(perm_category == GROUP && (mode & S_ISGID) == S_ISGID))
-			return('s');
+			return ('s');
 		if (perm_category == OTHER && (mode & S_ISVTX) == S_ISVTX)
 			return ('t');
 		return ('x');
@@ -71,17 +69,16 @@ char	execution_permission(mode_t mode, enum e_perm_category perm_category)
 	{
 		if ((perm_category == OWNER && (mode & S_ISUID) == S_ISUID) ||
 				(perm_category == GROUP && (mode & S_ISGID) == S_ISGID))
-			return('S');
+			return ('S');
 		if (perm_category == OTHER && (mode & S_ISVTX) == S_ISVTX)
 			return ('T');
 		return ('-');
 	}
 }
 
-
 char	file_type(mode_t mode)
 {
-	const mode_t file_types[] = {
+	const mode_t	file_types[] = {
 		S_IFREG,
 		S_IFLNK,
 		S_IFIFO,
@@ -91,8 +88,8 @@ char	file_type(mode_t mode)
 		S_IFSOCK,
 		S_IFWHT
 	};
-	const char	file_identifier[] = "-lpcdbsw";
-	int	index;
+	const char		file_identifier[] = "-lpcdbsw";
+	int				index;
 
 	mode = mode & S_IFMT;
 	index = 0;

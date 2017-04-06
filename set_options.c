@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 15:39:42 by mgautier          #+#    #+#             */
-/*   Updated: 2017/03/30 17:23:11 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/06 14:45:18 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "unix_usage_interface.h"
 #include "parameters_defs.h"
 
-static	t_bool *init_default_options(void)
+static t_bool	*init_default_options(void)
 {
 	static t_bool options[OPT_NBR];
 
@@ -26,7 +26,7 @@ static	t_bool *init_default_options(void)
 	return (options);
 }
 
-int	set_options(const char **arg_list, t_bool **ls_options)
+int				set_options(const char **arg_list, t_bool **ls_options)
 {
 	const t_apply_opt	apply_options[OPT_NBR] = {CONST_APPLY_OPT_INIT};
 	const char			synopsis[OPT_NBR] = {CONST_SYNOPSIS_INITIALIZER};

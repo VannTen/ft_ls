@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:02:53 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/05 18:27:09 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/06 14:47:51 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ void	print_long_format(struct s_file *file)
 	time = adjust_time(ctime(&file->file_infos.st_mtime));
 	if (file_mode[0] == 'l')
 	{
-	set_file_path(file->parent_path, file->path_len, file->dir_entry->d_name);
-	link_path[readlink(file->parent_path, link_path, PATH_MAX)] = '\0';
-	restore_path(file->parent_path, file->path_len);
-	format_string = "%s%4d %s %s %7lld %s %s -> %s\n";
+		set_file_path(
+				file->parent_path, file->path_len, file->dir_entry->d_name);
+		link_path[readlink(file->parent_path, link_path, PATH_MAX)] = '\0';
+		restore_path(file->parent_path, file->path_len);
+		format_string = "%s%4d %s %s %7lld %s %s -> %s\n";
 	}
 	else
 	{
@@ -79,6 +80,7 @@ void	print_long_format(struct s_file *file)
 			file->dir_entry->d_name,
 			link_path);
 }
+
 void	do_something_with_it(void *entry, void *list_dir)
 {
 	struct dirent	*file;
