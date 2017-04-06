@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/06 17:52:29 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/06 19:30:52 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 ** Implementation file : treat_file.c
 */
 
-void	do_something_with_it(void *entry, void *list_dir);
-void	do_something_with_it_2(void *entry, void *list_dir);
+void	do_something_with_it(void *entry);
+void	do_something_with_it_2(void *entry);
 int		get_block_nbr(void *file);
 
 /*
@@ -39,5 +39,6 @@ int		comp_time(void *entry_1, void *entry_2);
 
 void	*get_dir_entry(DIR *dir, char *parent_path, int path_len);
 void	*get_stat_dir(DIR *dir, char *parent_path, int path_len);
+void	add_to_sub_dirs_list(void *entry, void *list_dir);
 
 #endif

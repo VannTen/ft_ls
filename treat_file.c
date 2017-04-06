@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:02:53 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/06 17:52:04 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/06 19:33:04 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,36 +81,20 @@ void	print_long_format(struct s_file *file)
 			link_path);
 }
 
-void	do_something_with_it(void *entry, void *list_dir)
+void	do_something_with_it(void *entry)
 {
 	struct dirent	*file;
-	char			*dir_name;
 
 	file = entry;
 	ft_putendl(file->d_name);
-	if (file->d_type == DT_DIR &&
-			(ft_strcmp(".", file->d_name) != 0 &&
-			ft_strcmp("..", file->d_name) != 0))
-	{
-		dir_name = ft_strdup(file->d_name);
-		f_fifo_add(list_dir, dir_name);
-	}
 }
 
-void	do_something_with_it_2(void *entry, void *list_dir)
+void	do_something_with_it_2(void *entry)
 {
 	struct s_file	*file;
-	char			*dir_name;
 
 	file = entry;
 	print_long_format(file);
-	if (file->dir_entry->d_type == DT_DIR &&
-			(ft_strcmp(".", file->dir_entry->d_name) != 0 &&
-			ft_strcmp("..", file->dir_entry->d_name) != 0))
-	{
-		dir_name = ft_strdup(file->dir_entry->d_name);
-		f_fifo_add(list_dir, dir_name);
-	}
 }
 
 int		get_block_nbr(void *file)

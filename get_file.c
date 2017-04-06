@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:04 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/05 17:59:05 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/06 19:30:54 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,19 @@ void	*get_stat_dir(DIR *dir, char *parent_path, int path_len)
 	lstat(parent_path, &file->file_infos);
 	restore_path(parent_path, path_len);
 	return (file);
+}
+
+void	add_to_sub_dirs_list(void *entry, void *list_dir)
+{
+	struct s_file	*file;
+	char			*dir_name;
+
+	file = entry;
+	if (file->dir_entry->d_type == DT_DIR &&
+			(ft_strcmp(".", file->dir_entry->d_name) != 0 &&
+			 ft_strcmp("..", file->dir_entry->d_name) != 0))
+	{
+		dir_name = ft_strdup(file->dir_entry->d_name);
+		f_fifo_add(list_dir, dir_name);
+	}
 }
