@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/05 17:59:09 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/07 13:39:46 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FILE_DEFS_H
 # include "file_interface.h"
 # include <sys/stat.h>
+# define HIDDEN_MARK_CHAR '.'
 
 struct s_file
 {

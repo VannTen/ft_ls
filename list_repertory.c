@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/06 19:32:45 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/07 13:37:54 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@
 #include <stddef.h>
 #include <limits.h>
 
-static t_btree	*get_sorted_dir_entries(DIR *directory, t_compare comp_ft,
+static t_btree	*get_sorted_dir_entries(DIR *directory, t_ls_param *param,
 		char *parent_path, int path_len)
 {
 	void			*current_entry;
 	t_btree			*dir_entries;
-	void			*(*get_entry)(DIR*, char*, int);
 
-	get_entry = &get_stat_dir;
-	dir_entries = btree_create(comp_ft);
+	dir_entries = btree_create(param->ft_comp);
 	if (dir_entries != NULL)
 	{
-		current_entry = get_entry(directory, parent_path, path_len);
+		current_entry = param->ft_get_file(directory, parent_path, path_len,
+				param->options[ALL_FILES]);
 		while (current_entry != NULL)
 		{
 			if (btree_add(dir_entries, current_entry) == current_entry)
 				break ;
-			current_entry = get_entry(directory, parent_path, path_len);
+			current_entry = param->ft_get_file(directory, parent_path,
+					path_len, param->options[ALL_FILES]);
 		}
 	}
 	return (dir_entries);
@@ -50,22 +50,22 @@ static t_fifo	*list_one_dir(DIR *directory, struct s_ls_param *param,
 	t_btree	*sorted_entries;
 	t_fifo	*sub_dirs_list;
 
-	sorted_entries = get_sorted_dir_entries(directory, param->ft_comp,
+	sub_dirs_list = NULL;
+	sorted_entries = get_sorted_dir_entries(directory, param,
 			parent_path, path_len);
 	if (sorted_entries != NULL)
 	{
-		ft_printf("total %d\n", btree_sum(sorted_entries, &get_block_nbr));
-		btree_iter_in_order(sorted_entries, &do_something_with_it_2);
+		if (param->options[LONG_FORMAT])
+			ft_printf("total %d\n", btree_sum(sorted_entries, &get_block_nbr));
+		param->ft_loop_through(sorted_entries, param->ft_print_entry);
+		if (param->options[RECURSIVE])
+		{
+			sub_dirs_list = f_fifo_create();
+			param->ft_loop_through_2(
+					sorted_entries, &add_to_sub_dirs_list, sub_dirs_list);
+		}
+		btree_destroy(&sorted_entries, &no_destroy);
 	}
-	if (param->options[RECURSIVE])
-	{
-		sub_dirs_list = f_fifo_create();
-		btree_iter_two_param_in_order(
-				sorted_entries, &add_to_sub_dirs_list, sub_dirs_list);
-	}
-	else
-		sub_dirs_list = NULL;
-	btree_destroy(&sorted_entries, &no_destroy);
 	return (sub_dirs_list);
 }
 

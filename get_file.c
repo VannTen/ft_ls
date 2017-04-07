@@ -6,29 +6,36 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:04 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/06 19:30:54 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/07 13:40:29 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "file_defs.h"
-#include "libft.h"
 #include "path_tools_interface.h"
+#include "libft.h"
 #include <sys/types.h>
 #include <sys/dir.h>
 
-void	*get_dir_entry(DIR *dir, char *parent_path, int path_len)
+void	*get_dir_entry(DIR *dir, char *parent_path, int path_len,
+		t_bool take_dotfiles)
 {
+	struct dirent	*dir_entry;
 	(void)parent_path;
 	(void)path_len;
-	return (readdir(dir));
+	dir_entry = readdir(dir);
+	while (!take_dotfiles &&
+			(dir_entry != NULL && dir_entry->d_name[0] == HIDDEN_MARK_CHAR))
+		dir_entry = readdir(dir);
+	return (dir_entry);
 }
 
-void	*get_stat_dir(DIR *dir, char *parent_path, int path_len)
+void	*get_stat_dir(DIR *dir, char *parent_path, int path_len,
+		t_bool take_dotfiles)
 {
 	struct s_file	*file;
 	struct dirent	*dir_entry;
 
-	dir_entry = readdir(dir);
+	dir_entry = get_dir_entry(dir, parent_path, path_len, take_dotfiles);
 	if (dir_entry == NULL)
 		return (NULL);
 	file = ft_memalloc(sizeof(struct s_file));

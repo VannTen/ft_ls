@@ -6,12 +6,13 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/06 19:30:52 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/07 13:38:32 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILE_INTERFACE_H
 # define FILE_INTERFACE_H
+# include "libft.h"
 # include <sys/dir.h>
 
 /*
@@ -28,7 +29,8 @@ int		get_block_nbr(void *file);
 ** Implentation file : comp_file.c
 */
 
-int		comp_alpha(void *entry_1, void *entry_2);
+int		comp_alpha_stat(void *entry_1, void *entry_2);
+int		comp_alpha_dir_entry(void *entry_1, void *entry_2);
 int		comp_time(void *entry_1, void *entry_2);
 
 /*
@@ -37,8 +39,10 @@ int		comp_time(void *entry_1, void *entry_2);
 ** on the options which are set
 */
 
-void	*get_dir_entry(DIR *dir, char *parent_path, int path_len);
-void	*get_stat_dir(DIR *dir, char *parent_path, int path_len);
+void	*get_dir_entry(DIR *dir, char *parent_path, int path_len,
+		t_bool take_dotfiles);
+void	*get_stat_dir(DIR *dir, char *parent_path, int path_len,
+		t_bool take_dotfiles);
 void	add_to_sub_dirs_list(void *entry, void *list_dir);
 
 #endif
