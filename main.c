@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/06 18:55:49 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/07 19:14:05 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <sys/ucred.h>
 #include <sys/syslimits.h>
 
-int main(int argc, char **argv)
+int main(int argc, const char **argv)
 {
 	char path[PATH_MAX];
 	t_ls_param	*params;

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/07 13:37:54 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/07 19:29:10 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static t_fifo	*list_one_dir(DIR *directory, struct s_ls_param *param,
 		{
 			sub_dirs_list = f_fifo_create();
 			param->ft_loop_through_2(
-					sorted_entries, &add_to_sub_dirs_list, sub_dirs_list);
+					sorted_entries, param->ft_subdir, sub_dirs_list);
 		}
 		btree_destroy(&sorted_entries, &no_destroy);
 	}
@@ -95,9 +95,9 @@ void	list_dir(char *name, int path_len, struct s_ls_param *param)
 	t_fifo	*sub_dirs_list;
 	DIR		*subdir;
 
-	ft_putendl("");
-	ft_putstr(name);
-	ft_putstr(":\n");
+	//ft_putendl("");
+	//ft_putstr(name);
+	//ft_putstr(":\n");
 	errno = 0;
 	subdir = opendir(name);
 	if (subdir != NULL)
