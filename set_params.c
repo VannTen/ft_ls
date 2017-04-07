@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:56:24 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/07 19:27:41 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/07 19:51:38 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ void	default_functions(t_ls_param *param)
 	param->ft_subdir = add_to_sub_dirs_list_dirent;
 }
 
+void	need_stat(t_ls_param *ls_param)
+{
+	ls_param->ft_get_file = get_stat_dir;
+	if (ls_param->ft_comp == comp_alpha_dir_entry)
+		ls_param->ft_comp = comp_alpha_stat;
+	ls_param->ft_subdir = add_to_sub_dirs_list_stat;
+}
 void	apply_all_files(void *param)
 {
 	t_ls_param *ls_param;
@@ -43,12 +50,9 @@ void	apply_long_format(void *param)
 	t_ls_param *ls_param;
 
 	ls_param = param;
-	ls_param->ft_get_file = get_stat_dir;
 	ls_param->options[LONG_FORMAT] = TRUE;
-	if (ls_param->ft_comp == comp_alpha_dir_entry)
-		ls_param->ft_comp = comp_alpha_stat;
 	ls_param->ft_print_entry = print_long_format;
-	ls_param->ft_subdir = add_to_sub_dirs_list_stat;
+	need_stat(ls_param);
 }
 
 void	apply_reverse_order(void *param)
@@ -74,6 +78,7 @@ void	apply_sort_by_time(void *param)
 
 	ls_param = param;
 	ls_param->ft_comp = comp_time;
+	need_stat(ls_param);
 }
 
 t_ls_param *settle_param(int arg_count, const char **arg_values)
