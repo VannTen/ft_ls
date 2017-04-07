@@ -6,7 +6,7 @@
 #    By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/19 07:58:53 by mgautier          #+#    #+#              #
-#*   Updated: 2017/04/06 18:59:34 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/04/07 20:06:37 by mgautier         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC :=\
 	file_mode_and_perms.c\
 	path_tools.c\
 	set_params.c\
+	destroy_file.c\
 	main.c
 #	set_options.c\
 #	set_one_options.c\

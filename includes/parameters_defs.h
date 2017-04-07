@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 15:26:39 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/07 17:34:27 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/07 20:08:03 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ struct s_ls_param
 	t_loop_through		ft_loop_through;
 	t_loop_through_2	ft_loop_through_2;
 	t_iter_two			ft_subdir;
+	t_destroy			ft_destroy_file;
 	t_bool		*options;
 };
 

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/07 16:28:37 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/07 20:07:22 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,13 @@ void	*get_stat_dir(DIR *dir, char *parent_path, int path_len,
 		t_bool take_dotfiles);
 void	add_to_sub_dirs_list_stat(void *entry, void *list_dir);
 void	add_to_sub_dirs_list_dirent(void *entry, void *list_dir);
+
+/*
+** Destroyers
+** Implementation file : destroy_file.c
+*/
+
+void	dir_entry_destroy(void **direntry);
+void	stat_entry_destroy(void **s_file);
 
 #endif

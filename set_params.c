@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:56:24 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/07 19:51:38 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/07 20:19:15 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	default_functions(t_ls_param *param)
 	param->ft_loop_through = btree_iter_in_order;
 	param->ft_loop_through_2 = btree_iter_two_param_in_order;
 	param->ft_subdir = add_to_sub_dirs_list_dirent;
+	param->ft_destroy_file = dir_entry_destroy;
 }
 
 void	need_stat(t_ls_param *ls_param)
@@ -35,7 +36,10 @@ void	need_stat(t_ls_param *ls_param)
 	ls_param->ft_get_file = get_stat_dir;
 	if (ls_param->ft_comp == comp_alpha_dir_entry)
 		ls_param->ft_comp = comp_alpha_stat;
+	if (ls_param->ft_print_entry == print_name)
+		ls_param->ft_print_entry = print_name_stat;
 	ls_param->ft_subdir = add_to_sub_dirs_list_stat;
+	ls_param->ft_destroy_file = stat_entry_destroy;
 }
 void	apply_all_files(void *param)
 {
