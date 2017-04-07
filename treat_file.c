@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:02:53 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/06 19:33:04 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/07 19:31:06 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*adjust_time(char *std_time)
 	return (start);
 }
 
-void	print_long_format(struct s_file *file)
+static void	long_format(struct s_file *file)
 {
 	char			file_mode[MODE_ARRAY_SIZE + 1];
 	struct passwd	*user;
@@ -63,12 +63,12 @@ void	print_long_format(struct s_file *file)
 				file->parent_path, file->path_len, file->dir_entry->d_name);
 		link_path[readlink(file->parent_path, link_path, PATH_MAX)] = '\0';
 		restore_path(file->parent_path, file->path_len);
-		format_string = "%s%4d %s %s %7lld %s %s -> %s\n";
+		format_string = "%s%4d %s %s %8lld %s %s -> %s\n";
 	}
 	else
 	{
 		link_path[0] = '\0';
-		format_string = "%s%4d %s %s %7lld %s %s\n";
+		format_string = "%s%4d %s %s %8lld %s %s\n";
 	}
 	ft_printf(format_string,
 			file_mode,
@@ -81,7 +81,7 @@ void	print_long_format(struct s_file *file)
 			link_path);
 }
 
-void	do_something_with_it(void *entry)
+void	print_name(void *entry)
 {
 	struct dirent	*file;
 
@@ -89,12 +89,17 @@ void	do_something_with_it(void *entry)
 	ft_putendl(file->d_name);
 }
 
-void	do_something_with_it_2(void *entry)
+void	print_name_stat(void *entry)
+{
+	print_name(((struct s_file*)entry)->dir_entry);
+}
+
+void	print_long_format(void *entry)
 {
 	struct s_file	*file;
 
 	file = entry;
-	print_long_format(file);
+	long_format(file);
 }
 
 int		get_block_nbr(void *file)
