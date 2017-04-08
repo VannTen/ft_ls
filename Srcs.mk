@@ -6,7 +6,7 @@
 #    By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/19 07:58:53 by mgautier          #+#    #+#              #
-#*   Updated: 2017/04/07 20:06:37 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/04/08 18:08:47 by mgautier         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ TARGET := ft_ls
 SRC :=\
 	list_repertory.c\
 	get_file.c\
+	get_file_infos.c\
 	comp_file.c\
 	treat_file.c\
 	file_mode_and_perms.c\

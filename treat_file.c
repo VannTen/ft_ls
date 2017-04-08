@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:02:53 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/07 19:31:06 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/08 18:09:57 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,4 @@ void	print_long_format(void *entry)
 
 	file = entry;
 	long_format(file);
-}
-
-int		get_block_nbr(void *file)
-{
-	struct s_file	*s_file;
-
-	s_file = file;
-	return (s_file->file_infos.st_blocks);
 }
