@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:04 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/07 16:16:41 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/08 16:33:26 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	*get_dir_entry(DIR *dir, char *parent_path, int path_len,
 		t_bool take_dotfiles)
 {
 	struct dirent	*dir_entry;
+
 	(void)parent_path;
 	(void)path_len;
 	dir_entry = readdir(dir);
@@ -54,9 +55,9 @@ void	add_to_sub_dirs_list_dirent(void *entry, void *list_dir)
 	char			*dir_name;
 
 	file = entry;
-	if (file->d_type == DT_DIR &&
-			(ft_strcmp(".", file->d_name) != 0 &&
-			 ft_strcmp("..", file->d_name) != 0))
+	if (file->d_type == DT_DIR
+			&& (ft_strcmp(".", file->d_name) != 0
+				&& ft_strcmp("..", file->d_name) != 0))
 	{
 		dir_name = ft_strdup(file->d_name);
 		f_fifo_add(list_dir, dir_name);
@@ -69,9 +70,9 @@ void	add_to_sub_dirs_list_stat(void *entry, void *list_dir)
 	char			*dir_name;
 
 	file = entry;
-	if (file->dir_entry->d_type == DT_DIR &&
-			(ft_strcmp(".", file->dir_entry->d_name) != 0 &&
-			 ft_strcmp("..", file->dir_entry->d_name) != 0))
+	if (file->dir_entry->d_type == DT_DIR
+			&& (ft_strcmp(".", file->dir_entry->d_name) != 0
+				&& ft_strcmp("..", file->dir_entry->d_name) != 0))
 	{
 		dir_name = ft_strdup(file->dir_entry->d_name);
 		f_fifo_add(list_dir, dir_name);

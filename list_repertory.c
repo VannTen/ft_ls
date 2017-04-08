@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/07 20:10:25 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/08 18:06:29 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ static t_fifo	*list_one_dir(DIR *directory, struct s_ls_param *param,
 	return (sub_dirs_list);
 }
 
-static void	list_sub_dirs(char *parent_path, int path_len, t_fifo *subdirs_list,
-		struct s_ls_param *param)
+static void		list_sub_dirs(char *parent_path, int path_len,
+		t_fifo *subdirs_list, struct s_ls_param *param)
 {
 	char *dir_name;
 	char *dir_path;
@@ -90,14 +90,11 @@ static void	list_sub_dirs(char *parent_path, int path_len, t_fifo *subdirs_list,
 	parent_path[path_len] = '\0';
 }
 
-void	list_dir(char *name, int path_len, struct s_ls_param *param)
+void			list_dir(char *name, int path_len, struct s_ls_param *param)
 {
 	t_fifo	*sub_dirs_list;
 	DIR		*subdir;
 
-	//ft_putendl("");
-	//ft_putstr(name);
-	//ft_putstr(":\n");
 	errno = 0;
 	subdir = opendir(name);
 	if (subdir != NULL)
