@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/07 20:07:22 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/09 11:55:30 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FILE_INTERFACE_H
 # include "libft.h"
 # include <sys/dir.h>
+
+struct s_file;
 
 /*
 ** Print functions, also add directories to the list if recursive option is set
