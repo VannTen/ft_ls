@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 13:39:26 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/05 14:43:11 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/09 14:57:53 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ enum	e_mode_fields
 };
 
 void	fill_mode_field(char *mode_field, mode_t mode);
+char	file_type(mode_t mode);
 
 #endif

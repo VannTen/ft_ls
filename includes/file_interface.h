@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/09 11:55:30 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/09 15:14:55 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int		get_block_nbr(void *file);
 ** Implentation file : comp_file.c
 */
 
-int		comp_alpha_stat(void *entry_1, void *entry_2);
-int		comp_alpha_dir_entry(void *entry_1, void *entry_2);
-int		comp_time(void *entry_1, void *entry_2);
+int		comp_alpha_stat(const void *entry_1, const void *entry_2);
+int		comp_alpha_dir_entry(const void *entry_1, const void *entry_2);
+int		comp_time(const void *entry_1, const void *entry_2);
 
 /*
 ** Get files functions

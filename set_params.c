@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:56:24 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/07 20:19:15 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/09 14:11:32 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ t_ls_param *settle_param(int arg_count, const char **arg_values)
 	(void)arg_count;
 	params.options = options;
 	default_functions(&params);
-	apply_cmdline_opt(CONST_SYNOPSIS_INIT, arg_values, &params, apply);
+	params.options_number =
+		apply_cmdline_opt(CONST_SYNOPSIS_INIT, arg_values, &params, apply);
 	return (&params);
 }

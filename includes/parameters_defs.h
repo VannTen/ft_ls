@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 15:26:39 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/07 20:08:03 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/09 14:11:01 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ struct s_ls_param
 	t_iter_two			ft_subdir;
 	t_destroy			ft_destroy_file;
 	t_bool		*options;
+	int			options_number;
 };
 
 #endif
