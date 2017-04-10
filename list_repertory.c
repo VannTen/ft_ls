@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 11:33:40 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/10 17:55:34 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static t_btree	*get_sorted_dir_entries(DIR *directory, t_ls_param *param,
 	dir_entries = btree_create(param->ft_comp);
 	if (dir_entries != NULL)
 	{
-
 		file_name = get_file_name(directory, param->options[ALL_FILES]);
 		current_entry = param->ft_get_file(file_name, parent_path, path_len);
 		while (current_entry != NULL)
@@ -99,6 +98,8 @@ void			list_dir(char *name, int path_len, struct s_ls_param *param)
 	DIR		*subdir;
 
 	errno = 0;
+	ft_putchar('\n');
+	ft_putendl(name);
 	subdir = opendir(name);
 	if (subdir != NULL)
 	{
@@ -108,5 +109,5 @@ void			list_dir(char *name, int path_len, struct s_ls_param *param)
 		f_fifo_destroy(&sub_dirs_list, param->ft_destroy_file);
 	}
 	else
-		perror(NULL);
+		perror("test");
 }
