@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:04 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 11:48:38 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/10 17:46:52 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_file_name(DIR *dir, t_bool take_dotfiles)
 	while (!take_dotfiles &&
 			(dir_entry != NULL && dir_entry->d_name[0] == HIDDEN_MARK_CHAR))
 		dir_entry = readdir(dir);
-	return (dir_entry == NULL ? NULL : dir_entry->d_name);
+	return (dir_entry == NULL ? NULL : ft_strdup(dir_entry->d_name));
 }
 
 void	*get_dir_entry(char *file_name, char *parent_path, int path_len)
