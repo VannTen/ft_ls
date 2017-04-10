@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 11:35:33 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/10 13:30:45 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,17 @@
 struct s_file;
 
 /*
+** Check on files
+** Implementation file : is_file.c
+*/
+
+t_bool	is_dir(struct s_file *file);
+
+/*
 ** Print functions, also add directories to the list if recursive option is set
 ** Implementation file : treat_file.c
 */
 
-void	print_name(void *entry);
 void	print_name_stat(void *entry);
 void	print_long_format(void *entry);
 int		get_block_nbr(void *file);
@@ -33,7 +39,6 @@ int		get_block_nbr(void *file);
 */
 
 int		comp_alpha_stat(const void *entry_1, const void *entry_2);
-int		comp_alpha_dir_entry(const void *entry_1, const void *entry_2);
 int		comp_time(const void *entry_1, const void *entry_2);
 
 /*
@@ -43,10 +48,8 @@ int		comp_time(const void *entry_1, const void *entry_2);
 */
 
 char	*get_file_name(DIR *dir, t_bool take_dotfiles);
-void	*get_dir_entry(char *file_name, char *parent_path, int path_len);
-void	*get_stat_dir(char *file_name, char *parent_path, int path_len);
+void	*get_stat_dir(const char *file_name, char *parent_path, int path_len);
 void	add_to_sub_dirs_list_stat(void *entry, void *list_dir);
-void	add_to_sub_dirs_list_dirent(void *entry, void *list_dir);
 
 /*
 ** Destroyers

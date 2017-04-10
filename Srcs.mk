@@ -6,7 +6,7 @@
 #    By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/19 07:58:53 by mgautier          #+#    #+#              #
-#*   Updated: 2017/04/09 11:52:36 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/04/10 13:29:47 by mgautier         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC :=\
 	set_params.c\
 	destroy_file.c\
 	long_format.c\
+	is_file.c\
 	main.c
 #	set_options.c\
 #	set_one_options.c\
