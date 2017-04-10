@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 11:28:13 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/09 11:58:58 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/10 11:41:48 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	long_format_usual(struct s_file *file,
 			long_form->group->gr_name,
 			file->file_infos.st_size,
 			adjust_time(ctime(&file->file_infos.st_mtime)),
-			file->dir_entry->d_name,
+			file->dir_entry,
 			long_form->link_path);
 }
 
@@ -68,7 +68,7 @@ void	long_format_no_user_name(struct s_file *file,
 			long_form->group->gr_name,
 			file->file_infos.st_size,
 			adjust_time(ctime(&file->file_infos.st_mtime)),
-			file->dir_entry->d_name,
+			file->dir_entry,
 			long_form->link_path);
 }
 
@@ -86,7 +86,7 @@ void	long_format_no_group_name(struct s_file *file,
 			file->file_infos.st_gid,
 			file->file_infos.st_size,
 			adjust_time(ctime(&file->file_infos.st_mtime)),
-			file->dir_entry->d_name,
+			file->dir_entry,
 			long_form->link_path);
 }
 
@@ -104,6 +104,6 @@ void	long_format_neither(struct s_file *file,
 			file->file_infos.st_gid,
 			file->file_infos.st_size,
 			adjust_time(ctime(&file->file_infos.st_mtime)),
-			file->dir_entry->d_name,
+			file->dir_entry,
 			long_form->link_path);
 }

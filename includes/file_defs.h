@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/07 13:39:46 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/10 11:24:39 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 struct s_file
 {
 	struct stat		file_infos;
-	struct dirent	*dir_entry;
+	char			*dir_entry;
 	char			*parent_path;
 	int				path_len;
 };

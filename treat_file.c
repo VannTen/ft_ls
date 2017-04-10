@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:02:53 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/09 11:53:06 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/10 11:44:49 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	pop_long_format(struct s_file *file,
 	if (long_form->file_mode[0] == 'l')
 	{
 		set_file_path(
-				file->parent_path, file->path_len, file->dir_entry->d_name);
+				file->parent_path, file->path_len, file->dir_entry);
 		long_form->link_path[readlink(
 				file->parent_path, long_form->link_path, PATH_MAX)] = '\0';
 		restore_path(file->parent_path, file->path_len);
@@ -56,10 +56,7 @@ static void	long_format(struct s_file *file)
 
 void	print_name(void *entry)
 {
-	struct dirent	*file;
-
-	file = entry;
-	ft_putendl(file->d_name);
+	ft_putendl(entry);
 }
 
 void	print_name_stat(void *entry)

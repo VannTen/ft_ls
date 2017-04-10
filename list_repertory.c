@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/08 18:06:29 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/10 11:33:40 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,23 @@
 static t_btree	*get_sorted_dir_entries(DIR *directory, t_ls_param *param,
 		char *parent_path, int path_len)
 {
-	void			*current_entry;
-	t_btree			*dir_entries;
+	void	*current_entry;
+	char	*file_name;
+	t_btree	*dir_entries;
 
 	dir_entries = btree_create(param->ft_comp);
 	if (dir_entries != NULL)
 	{
-		current_entry = param->ft_get_file(directory, parent_path, path_len,
-				param->options[ALL_FILES]);
+
+		file_name = get_file_name(directory, param->options[ALL_FILES]);
+		current_entry = param->ft_get_file(file_name, parent_path, path_len);
 		while (current_entry != NULL)
 		{
 			if (btree_add(dir_entries, current_entry) == current_entry)
 				break ;
-			current_entry = param->ft_get_file(directory, parent_path,
-					path_len, param->options[ALL_FILES]);
+			file_name = get_file_name(directory, param->options[ALL_FILES]);
+			current_entry =
+				param->ft_get_file(file_name, parent_path, path_len);
 		}
 	}
 	return (dir_entries);

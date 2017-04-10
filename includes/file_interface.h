@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/09 15:14:55 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/10 11:35:33 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,9 @@ int		comp_time(const void *entry_1, const void *entry_2);
 ** on the options which are set
 */
 
-void	*get_dir_entry(DIR *dir, char *parent_path, int path_len,
-		t_bool take_dotfiles);
-void	*get_stat_dir(DIR *dir, char *parent_path, int path_len,
-		t_bool take_dotfiles);
+char	*get_file_name(DIR *dir, t_bool take_dotfiles);
+void	*get_dir_entry(char *file_name, char *parent_path, int path_len);
+void	*get_stat_dir(char *file_name, char *parent_path, int path_len);
 void	add_to_sub_dirs_list_stat(void *entry, void *list_dir);
 void	add_to_sub_dirs_list_dirent(void *entry, void *list_dir);
 
