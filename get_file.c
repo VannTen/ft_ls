@@ -16,6 +16,8 @@
 #include "libft.h"
 #include <sys/types.h>
 #include <sys/dir.h>
+#include <sys/errno.h>
+#include <stdio.h>
 
 char	*get_file_name(DIR *dir, t_bool take_dotfiles)
 {
@@ -27,16 +29,10 @@ char	*get_file_name(DIR *dir, t_bool take_dotfiles)
 	return (dir_entry == NULL ? NULL : ft_strdup(dir_entry->d_name));
 }
 
-void	*get_dir_entry(char *file_name, char *parent_path, int path_len)
-{
-	(void)parent_path;
-	(void)path_len;
-	return (file_name);
-}
-
-void	*get_stat_dir(char *file_name, char *parent_path, int path_len)
+void	*get_stat_dir(const char *file_name, char *parent_path, int path_len)
 {
 	struct s_file	*file;
+	int				ret_stat;
 
 	if (file_name == NULL)
 		return (NULL);
@@ -44,11 +40,19 @@ void	*get_stat_dir(char *file_name, char *parent_path, int path_len)
 	if (file != NULL)
 	{
 		file->dir_entry = file_name;
-		file->parent_path = parent_path;
-		file->path_len = path_len;
-		set_file_path(parent_path, path_len, file_name);
-		lstat(parent_path, &file->file_infos);
-		restore_path(parent_path, path_len);
+		errno = 0;
+		if (parent_path != NULL)
+		{
+			file->parent_path = parent_path;
+			file->path_len = path_len;
+			set_file_path(parent_path, path_len, file_name);
+			ret_stat = stat(parent_path, &file->file_infos);
+			restore_path(parent_path, path_len);
+		}
+		else
+			ret_stat = stat(file_name, &file->file_infos);
+		if (ret_stat == -1)
+			perror(file_name);
 	}
 	return (file);
 }

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:56:24 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 11:51:03 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/10 12:06:45 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,15 @@ void	default_functions(t_ls_param *param)
 	param->options[REVERSE_ORDER] = FALSE;
 	param->options[RECURSIVE] = FALSE;
 	param->options[SORT_BY_MODIF_TIME] = FALSE;
-	param->ft_comp = comp_alpha_dir_entry;
-	param->ft_get_file = get_dir_entry;
-	param->ft_print_entry = print_name;
-	param->ft_get_file = get_dir_entry;
+	param->ft_comp = comp_alpha_stat;
+	param->ft_get_file = get_stat_dir;
+	param->ft_print_entry = print_name_stat;
 	param->ft_loop_through = btree_iter_in_order;
 	param->ft_loop_through_2 = btree_iter_two_param_in_order;
-	param->ft_subdir = NULL;
+	param->ft_subdir = add_to_sub_dirs_list_stat;
 	param->ft_destroy_file = dir_entry_destroy;
 }
 
-void	need_stat(t_ls_param *ls_param)
-{
-	ls_param->ft_get_file = get_stat_dir;
-	if (ls_param->ft_comp == comp_alpha_dir_entry)
-		ls_param->ft_comp = comp_alpha_stat;
-	if (ls_param->ft_print_entry == print_name)
-		ls_param->ft_print_entry = print_name_stat;
-	ls_param->ft_subdir = add_to_sub_dirs_list_stat;
-	ls_param->ft_destroy_file = stat_entry_destroy;
-}
 void	apply_all_files(void *param)
 {
 	t_ls_param *ls_param;
@@ -56,7 +45,6 @@ void	apply_long_format(void *param)
 	ls_param = param;
 	ls_param->options[LONG_FORMAT] = TRUE;
 	ls_param->ft_print_entry = print_long_format;
-	need_stat(ls_param);
 }
 
 void	apply_reverse_order(void *param)
@@ -74,8 +62,6 @@ void	apply_recursive(void *param)
 
 	ls_param = param;
 	ls_param->options[RECURSIVE] = TRUE;
-	ls_param->ft_subdir = add_to_sub_dirs_list_stat;
-	need_stat(ls_param);
 }
 
 void	apply_sort_by_time(void *param)
@@ -84,7 +70,6 @@ void	apply_sort_by_time(void *param)
 
 	ls_param = param;
 	ls_param->ft_comp = comp_time;
-	need_stat(ls_param);
 }
 
 t_ls_param *settle_param(int arg_count, const char **arg_values)

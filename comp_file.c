@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:03:15 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 11:40:42 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/10 12:03:07 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@ int		comp_alpha_stat(const void *entry_1, const void *entry_2)
 	file_1 = entry_1;
 	file_2 = entry_2;
 	return (ft_strcmp(file_1->dir_entry, file_2->dir_entry));
-}
-
-int		comp_alpha_dir_entry(const void *entry_1, const void *entry_2)
-{
-	return (ft_strcmp(entry_1, entry_2));
 }
 
 int		comp_time(const void *entry_1, const void *entry_2)
