@@ -6,13 +6,14 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 17:55:34 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:34:42 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "file_interface.h"
 #include "list_dir_interface.h"
+#include "long_format.h"
 #include "parameters_defs.h"
 #include <sys/types.h>
 #include <sys/dir.h>
@@ -51,6 +52,7 @@ static t_fifo	*list_one_dir(DIR *directory, struct s_ls_param *param,
 {
 	t_btree	*sorted_entries;
 	t_fifo	*sub_dirs_list;
+
 
 	sub_dirs_list = NULL;
 	sorted_entries = get_sorted_dir_entries(directory, param,
