@@ -6,13 +6,14 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 17:14:30 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:55:19 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILE_DEFS_H
 # define FILE_DEFS_H
 # include "file_interface.h"
+# include "long_format.h"
 # include <sys/stat.h>
 # include <grp.h>
 # include <pwd.h>
@@ -27,6 +28,7 @@ struct s_file
 	int				path_len;
 	struct passwd	*user;
 	struct group	*group;
+	t_fields		*fields;
 };
 
 #endif

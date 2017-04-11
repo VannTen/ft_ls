@@ -6,12 +6,12 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 17:34:42 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:58:57 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "file_interface.h"
+#include "file_defs.h"
 #include "list_dir_interface.h"
 #include "long_format.h"
 #include "parameters_defs.h"
@@ -26,9 +26,9 @@
 static t_btree	*get_sorted_dir_entries(DIR *directory, t_ls_param *param,
 		char *parent_path, int path_len)
 {
-	void	*current_entry;
-	char	*file_name;
-	t_btree	*dir_entries;
+	struct s_file	*current_entry;
+	char			*file_name;
+	t_btree			*dir_entries;
 
 	dir_entries = btree_create(param->ft_comp);
 	if (dir_entries != NULL)
@@ -37,6 +37,8 @@ static t_btree	*get_sorted_dir_entries(DIR *directory, t_ls_param *param,
 		current_entry = param->ft_get_file(file_name, parent_path, path_len);
 		while (current_entry != NULL)
 		{
+			current_entry->fields =
+				check_fields(current_entry, param->temp_fields);
 			if (btree_add(dir_entries, current_entry) == current_entry)
 				break ;
 			file_name = get_file_name(directory, param->options[ALL_FILES]);
@@ -52,9 +54,11 @@ static t_fifo	*list_one_dir(DIR *directory, struct s_ls_param *param,
 {
 	t_btree	*sorted_entries;
 	t_fifo	*sub_dirs_list;
-
+	t_fields fields;
 
 	sub_dirs_list = NULL;
+	init_fields(&fields);
+	param->temp_fields = &fields;
 	sorted_entries = get_sorted_dir_entries(directory, param,
 			parent_path, path_len);
 	if (sorted_entries != NULL)

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 15:26:39 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 14:37:48 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:41:17 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARAMETERS_DEFS_H
 # include "parameters_interface.h"
 # include "libft.h"
+# include "long_format.h"
 # include <sys/syslimits.h>
 # include <sys/dir.h>
 
@@ -32,8 +33,9 @@ struct s_ls_param
 	t_iter_two			ft_subdir;
 	t_destroy			ft_destroy_file;
 	t_btree				*error_tree;
-	t_bool		*options;
-	int			options_number;
+	t_bool				*options;
+	int					options_number;
+	t_fields			*temp_fields;
 };
 
 #endif

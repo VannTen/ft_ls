@@ -6,18 +6,18 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 18:13:18 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 17:36:51 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/11 18:00:08 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LONG_FORMAT_H
 # define LONG_FORMAT_H
 # include "file_interface.h"
+# include "mode_and_perms_interface.h"
 # include <grp.h>
 # include <pwd.h>
 # include <uuid/uuid.h>
 # include <sys/syslimits.h>
-# define MODE_ARRAY_SIZE 10
 
 enum	e_type_of_string
 {
@@ -61,7 +61,8 @@ void	long_format_neither(struct s_file *file,
 
 void	get_bigger_field_width(struct s_long_form_field *to_mod,
 		const struct s_long_form_field *ref);
-void	fill_dir_field(struct s_file *file, struct s_long_form_field *field);
-void	init_fields(struct s_long_form_field *to_mod)
+void	fill_file_field(struct s_file *file, struct s_long_form_field *field);
+void	init_fields(struct s_long_form_field *to_mod);
+t_fields *check_fields(struct s_file *file, t_fields *ref);
 
 #endif

@@ -6,15 +6,16 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 17:30:38 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 17:36:05 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/11 18:33:43 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "long_format.h"
 #include "file_defs.h"
 #include "libft.h"
+#include <sys/types.h>
 
-void	fill_dir_field(struct s_file *file, struct s_long_form_field *field)
+void	fill_file_field(struct s_file *file, struct s_long_form_field *field)
 {
 	field->hard_link = itoa_len_signed(file->file_infos.st_nlink, 10);
 	field->user = file->user == NULL ?
@@ -48,3 +49,14 @@ void	init_fields(struct s_long_form_field *to_mod)
 	to_mod->device_major = 0;
 	to_mod->device_minor = 0;
 }
+
+t_fields *check_fields(struct s_file *file, t_fields *ref)
+{
+	t_fields	this_file;
+	file->user = getpwuid(file->file_infos.st_uid);
+	file->group = getgrgid(file->file_infos.st_gid);
+	fill_file_field(file, &this_file);
+	get_bigger_field_width(ref, &this_file);
+	return (ref);
+}
+

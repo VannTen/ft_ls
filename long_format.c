@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 11:28:13 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 17:24:27 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/11 19:01:44 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,26 @@ void	long_format_usual(struct s_file *file,
 		struct s_long_form_info *long_form)
 {
 	char	*fmt;
-	int		precision_dev;
+	t_bool	has_device_nb;
 
-	if (is_block_or_char_file(file))
-		precision_dev = 1;
-	else
-		precision_dev = 0;
+	has_device_nb = is_block_or_char_file(file);
 	fmt = long_form->file_mode[0] == 'l' ?
-			"%s%4d %s %s %.0d%.*s%.0lld %s %s -> %s\n" :
-			"%s%4d %s %s %.0d%.*s%.0lld %s %s\n",
+			"%s %*d %-*s %-*s %*.*d%1.*s%*lld %s %s -> %s\n" :
+			"%s %*d %-*s %-*s %*.*d%1.*s%*lld %s %s\n";
 	ft_printf(fmt,
 			long_form->file_mode,
+			file->fields->hard_link,
 			file->file_infos.st_nlink,
+			file->fields->user,
 			long_form->user->pw_name,
+			file->fields->group,
 			long_form->group->gr_name,
+			file->fields->device_major,
+			has_device_nb ? 1 : 0,
 			major(file->file_infos.st_rdev),
-			precision_dev,
+			has_device_nb ? 1 : 0,
 			",",
+			file->fields->device_minor,
 			is_block_or_char_file(file) ? minor(file->file_infos.st_rdev) :
 			file->file_infos.st_size,
 			adjust_time(ctime(&file->file_infos.st_mtime)),
