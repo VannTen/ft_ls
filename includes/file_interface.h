@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 13:30:45 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/11 16:01:14 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ struct s_file;
 */
 
 t_bool	is_dir(struct s_file *file);
+t_bool	is_block_or_char_file(struct s_file *file);
 
 /*
 ** Print functions, also add directories to the list if recursive option is set

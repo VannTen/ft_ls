@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:28:09 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 13:30:06 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/11 16:00:55 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,12 @@
 t_bool	is_dir(struct s_file *file)
 {
 	return (file_type(file->file_infos.st_mode) == 'd');
+}
+
+t_bool	is_block_or_char_file(struct s_file *file)
+{
+	char type;
+
+	type = file_type(file->file_infos.st_mode);
+	return (type == 'b' || type == 'c');
 }

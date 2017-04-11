@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 14:01:00 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:14:30 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define FILE_DEFS_H
 # include "file_interface.h"
 # include <sys/stat.h>
+# include <grp.h>
+# include <pwd.h>
+# include <uuid/uuid.h>
 # define HIDDEN_MARK_CHAR '.'
 
 struct s_file
@@ -22,6 +25,8 @@ struct s_file
 	const char		*dir_entry;
 	char			*parent_path;
 	int				path_len;
+	struct passwd	*user;
+	struct group	*group;
 };
 
 #endif
