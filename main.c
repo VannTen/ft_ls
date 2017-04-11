@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 14:56:18 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/11 14:59:24 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,19 @@ void	sort_cmd_line(const char **first_arg,
 	int				index;
 	struct s_file	*file;
 	char			path[PATH_MAX];
+	char			*error_string;
 
 	index = 0;
 	ft_strcpy(path, ".");
 	while (first_arg[index] != NULL)
 	{
+		errno = 0;
 		file = param->ft_get_file(first_arg[index], NULL, 0);
 		if (file == NULL)
 		{
-			perror(first_arg[index]);
-			break ;
+			ft_asprintf(&error_string, "%s: %s: %s\n",
+					first_arg[-1], first_arg[index], strerror(errno));
+			btree_add(param->error_tree, error_string);
 		}
 		else
 		{
@@ -61,6 +64,17 @@ static void	list_dirs(void *v_dir_file, void *v_param)
 	ft_strcpy(path, dir_file->dir_entry);
 	list_dir(path, ft_strlen(dir_file->dir_entry), param);
 }
+
+static int	f_strcmp(const void *str1, const void *str2)
+{
+	return (ft_strcmp(str1, str2));
+}
+
+static void f_print_error_cli(void *error_string)
+{
+	ft_putstr(error_string);
+}
+
 int	main(int argc, const char **argv)
 {
 	char		path[PATH_MAX];
@@ -69,12 +83,16 @@ int	main(int argc, const char **argv)
 	t_btree		*repo_cli;
 
 	params = settle_param(argc, argv);
-	file_cli = btree_create(params->ft_comp);
-	repo_cli = btree_create(params->ft_comp);
+	if (params->options_number == USAGE_ERROR)
+		return (EXIT_FAILURE);
 	if (argc > params->options_number)
 	{
+		params->error_tree = btree_create(f_strcmp);
+		file_cli = btree_create(params->ft_comp);
+		repo_cli = btree_create(params->ft_comp);
 		sort_cmd_line(argv + params->options_number, file_cli, repo_cli,
 				params);
+		btree_iter_in_order(params->error_tree, f_print_error_cli);
 		params->ft_loop_through(file_cli, params->ft_print_entry);
 		params->ft_loop_through_2(repo_cli, list_dirs, params);
 	}

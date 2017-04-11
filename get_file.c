@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:04 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 17:46:52 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/11 13:41:09 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,16 @@ void	*get_stat_dir(const char *file_name, char *parent_path, int path_len)
 			file->parent_path = parent_path;
 			file->path_len = path_len;
 			set_file_path(parent_path, path_len, file_name);
-			ret_stat = stat(parent_path, &file->file_infos);
+			ret_stat = lstat(parent_path, &file->file_infos);
 			restore_path(parent_path, path_len);
 		}
 		else
-			ret_stat = stat(file_name, &file->file_infos);
+			ret_stat = lstat(file_name, &file->file_infos);
 		if (ret_stat == -1)
-			perror(file_name);
+		{
+			free(file);
+			file = NULL;
+		}
 	}
 	return (file);
 }
