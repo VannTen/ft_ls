@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 18:13:18 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 18:00:08 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 11:14:39 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct	s_long_form_field
 	int group;
 	int	device_major;
 	int	device_minor;
+	int	device_sep;
 }				t_fields;
 
 struct s_long_form_info

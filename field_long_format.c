@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 17:30:38 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 18:33:43 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 11:18:15 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	fill_file_field(struct s_file *file, struct s_long_form_field *field)
 	field->device_minor =
 		itoa_len_signed(is_block_or_char_file(file) ?
 				minor(file->file_infos.st_rdev) : file->file_infos.st_size, 10);
+	field->device_sep = is_block_or_char_file(file) ? 2 : 1;
 }
 
 void	get_bigger_field_width(struct s_long_form_field *to_mod,
@@ -39,6 +40,7 @@ void	get_bigger_field_width(struct s_long_form_field *to_mod,
 	to_mod->group = MAX(to_mod->group, ref->group);
 	to_mod->device_major = MAX(to_mod->device_major, ref->device_major);
 	to_mod->device_minor = MAX(to_mod->device_minor, ref->device_minor);
+	to_mod->device_sep = MAX(to_mod->device_sep, ref->device_sep);
 }
 
 void	init_fields(struct s_long_form_field *to_mod)
@@ -48,6 +50,7 @@ void	init_fields(struct s_long_form_field *to_mod)
 	to_mod->group = 0;
 	to_mod->device_major = 0;
 	to_mod->device_minor = 0;
+	to_mod->device_sep = 0;
 }
 
 t_fields *check_fields(struct s_file *file, t_fields *ref)

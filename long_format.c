@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 11:28:13 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 19:01:44 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 12:54:12 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,23 @@
 ** day of the week, and skip the end (seconds and year)
 */
 
-char	*adjust_time(char *std_time)
+char	*adjust_time(const time_t *timestamp)
 {
 	char	*start;
+	char	*time_string;
 	int		index;
+	time_t	time_of_day;
+	time_t	diff;
 
+	time_string = ctime(timestamp);
+	time_of_day = time(NULL);
 	index = 0;
 	while (std_time[index] != ' ')
 		index++;
 	index++;
 	start = std_time + index;
+	diff = time_of_day - *timestamp;
+	if (ABS(diff) > SIX_MONTHS_TIME_DIFF)
 	while (std_time[index] != ':')
 		index++;
 	std_time[index + 3] = '\0';
@@ -45,8 +52,8 @@ void	long_format_usual(struct s_file *file,
 
 	has_device_nb = is_block_or_char_file(file);
 	fmt = long_form->file_mode[0] == 'l' ?
-			"%s %*d %-*s %-*s %*.*d%1.*s%*lld %s %s -> %s\n" :
-			"%s %*d %-*s %-*s %*.*d%1.*s%*lld %s %s\n";
+			"%s  %*d %-*s %-*s %*.*d%-*.*s%*lld %s %s -> %s\n" :
+			"%s  %*d %-*s %-*s %*.*d%-*.*s%*lld %s %s\n";
 	ft_printf(fmt,
 			long_form->file_mode,
 			file->fields->hard_link,
@@ -58,6 +65,7 @@ void	long_format_usual(struct s_file *file,
 			file->fields->device_major,
 			has_device_nb ? 1 : 0,
 			major(file->file_infos.st_rdev),
+			file->fields->device_sep,
 			has_device_nb ? 1 : 0,
 			",",
 			file->fields->device_minor,
