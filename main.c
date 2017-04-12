@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 17:56:05 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 18:13:53 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int	main(int argc, const char **argv)
 		params->temp_fields = &fields;
 		sort_cmd_line(argv + params->options_number, file_cli, repo_cli,
 				params);
+		params->is_first = btree_count(file_cli) == 0;
 		btree_iter_in_order(params->error_tree, f_print_error_cli);
 		params->ft_loop_through(file_cli, params->ft_print_entry);
 		params->ft_loop_through_2(repo_cli, list_dirs, params);
