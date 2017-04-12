@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 18:22:01 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 18:42:39 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	sort_cmd_line(const char **first_arg,
 	char			*error_string;
 
 	index = 0;
-	ft_strcpy(param->parent_path, ".");
+	param->parent_path[0] = '\0';
 	while (first_arg[index] != NULL)
 	{
 		errno = 0;
-		file = param->ft_get_file(first_arg[index], param->parent_path, 1);
+		file = param->ft_get_file(first_arg[index], param->parent_path, 0);
 		if (file == NULL)
 		{
 			ft_asprintf(&error_string, "%s: %s: %s\n",
