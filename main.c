@@ -6,14 +6,13 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 18:42:39 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 18:57:26 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list_dir_interface.h"
 #include "file_defs.h"
 #include "long_format.h"
-#include "options_interface.h"
 #include "parameters_defs.h"
 #include "libft.h"
 #include <sys/types.h>
