@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 17:11:01 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 18:30:24 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,13 @@ static void		list_sub_dirs(char *parent_path, int path_len,
 	while (dir_name != NULL)
 	{
 		dir_path = ft_strcpy(parent_path + path_len, dir_name);
-		list_dir(parent_path, path_len + ft_strlen(dir_name), param);
+		errno = 0;
+		if (list_dir(parent_path, path_len + ft_strlen(dir_name), param) != 0)
+		{
+			ft_dprintf(STDERR_FILENO, "%s: %s: %s\n",
+					param->prog_name, dir_name, strerror(errno));
+			param->has_error = TRUE;
+		}
 		ft_strclr(parent_path + path_len);
 		ft_strdel(&dir_name);
 		dir_name = f_fifo_take(subdirs_list);
@@ -98,7 +104,7 @@ static void		list_sub_dirs(char *parent_path, int path_len,
 	parent_path[path_len] = '\0';
 }
 
-void			list_dir(char *name, int path_len, struct s_ls_param *param)
+int				list_dir(char *name, int path_len, struct s_ls_param *param)
 {
 	t_fifo	*sub_dirs_list;
 	DIR		*subdir;
@@ -111,6 +117,7 @@ void			list_dir(char *name, int path_len, struct s_ls_param *param)
 		ft_printf("%s:\n", name);
 	else
 		param->put_dir_name_before = TRUE;
+	errno = 0;
 	subdir = opendir(name);
 	if (subdir != NULL)
 	{
@@ -118,10 +125,8 @@ void			list_dir(char *name, int path_len, struct s_ls_param *param)
 		closedir(subdir);
 		list_sub_dirs(name, path_len, sub_dirs_list, param);
 		f_fifo_destroy(&sub_dirs_list, param->ft_destroy_file);
+		return (0);
 	}
 	else
-	{
-		perror(NULL);
-		param->has_error = TRUE;
-	}
+		return (1);
 }

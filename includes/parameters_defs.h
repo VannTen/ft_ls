@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 15:26:39 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 17:54:53 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 18:16:42 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ struct s_ls_param
 	t_bool				has_error;
 	t_bool				is_first;
 	t_bool				put_dir_name_before;
+	const char			*prog_name;
 };
 
 #endif

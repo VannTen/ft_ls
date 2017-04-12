@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 18:13:53 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 18:22:01 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	sort_cmd_line(const char **first_arg,
 		if (file == NULL)
 		{
 			ft_asprintf(&error_string, "%s: %s: %s\n",
-					first_arg[-1], first_arg[index], strerror(errno));
+					param->prog_name, first_arg[index], strerror(errno));
 			btree_add(param->error_tree, error_string);
 			param->has_error = TRUE;
 		}
@@ -89,6 +89,7 @@ int	main(int argc, const char **argv)
 
 	params = settle_param(argc, argv);
 	params->parent_path = path;
+	params->prog_name = argv[0];
 	if (params->options_number == USAGE_ERROR)
 		return (EXIT_FAILURE);
 	params->put_dir_name_before = argc - params->options_number > 1;
