@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 11:28:13 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 12:54:12 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 14:30:57 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,22 @@ char	*adjust_time(const time_t *timestamp)
 	int		index;
 	time_t	time_of_day;
 	time_t	diff;
+	int		count_space;
 
+	count_space = 0;
 	time_string = ctime(timestamp);
 	time_of_day = time(NULL);
 	index = 0;
-	while (std_time[index] != ' ')
+	while (time_string[index] != ' ')
 		index++;
 	index++;
-	start = std_time + index;
+	start = time_string + index;
 	diff = time_of_day - *timestamp;
-	if (ABS(diff) > SIX_MONTHS_TIME_DIFF)
-	while (std_time[index] != ':')
+	while (time_string[index] != ':')
 		index++;
-	std_time[index + 3] = '\0';
+	if (diff > 6 * 30 * 24 * 60 * 60 || diff < 0)
+		ft_strncpy(time_string + index - 2, time_string + index + 6, 5);
+	time_string[index + 3] = '\0';
 	return (start);
 }
 
@@ -52,8 +55,8 @@ void	long_format_usual(struct s_file *file,
 
 	has_device_nb = is_block_or_char_file(file);
 	fmt = long_form->file_mode[0] == 'l' ?
-			"%s  %*d %-*s %-*s %*.*d%-*.*s%*lld %s %s -> %s\n" :
-			"%s  %*d %-*s %-*s %*.*d%-*.*s%*lld %s %s\n";
+		"%s  %*d %-*s %-*s %*.*d%-*.*s%*lld %s %s -> %s\n" :
+		"%s  %*d %-*s %-*s %*.*d%-*.*s%*lld %s %s\n";
 	ft_printf(fmt,
 			long_form->file_mode,
 			file->fields->hard_link,
@@ -71,7 +74,7 @@ void	long_format_usual(struct s_file *file,
 			file->fields->device_minor,
 			is_block_or_char_file(file) ? minor(file->file_infos.st_rdev) :
 			file->file_infos.st_size,
-			adjust_time(ctime(&file->file_infos.st_mtime)),
+			adjust_time(&file->file_infos.st_mtime),
 			file->dir_entry,
 			long_form->link_path);
 }
@@ -82,14 +85,14 @@ void	long_format_no_user_name(struct s_file *file,
 	char *fmt;
 
 	fmt = long_form->file_mode[0] == 'l' ?
-			"%s%4d %d %s %8lld %s %s -> %s\n" : "%s%4d %d %s %8lld %s %s\n";
+		"%s%4d %d %s %8lld %s %s -> %s\n" : "%s%4d %d %s %8lld %s %s\n";
 	ft_printf(fmt,
 			long_form->file_mode,
 			file->file_infos.st_nlink,
 			file->file_infos.st_uid,
 			long_form->group->gr_name,
 			file->file_infos.st_size,
-			adjust_time(ctime(&file->file_infos.st_mtime)),
+			adjust_time(&file->file_infos.st_mtime),
 			file->dir_entry,
 			long_form->link_path);
 }
@@ -100,14 +103,14 @@ void	long_format_no_group_name(struct s_file *file,
 	char *fmt;
 
 	fmt = long_form->file_mode[0] == 'l' ?
-			"%s%4d %s %d %8lld %s %s -> %s\n" : "%s%4d %s %d %8lld %s %s\n";
+		"%s%4d %s %d %8lld %s %s -> %s\n" : "%s%4d %s %d %8lld %s %s\n";
 	ft_printf(fmt,
 			long_form->file_mode,
 			file->file_infos.st_nlink,
 			long_form->user->pw_name,
 			file->file_infos.st_gid,
 			file->file_infos.st_size,
-			adjust_time(ctime(&file->file_infos.st_mtime)),
+			adjust_time(&file->file_infos.st_mtime),
 			file->dir_entry,
 			long_form->link_path);
 }
@@ -118,14 +121,14 @@ void	long_format_neither(struct s_file *file,
 	char *fmt;
 
 	fmt = long_form->file_mode[0] == 'l' ?
-			"%s%4d %d %d %8lld %s %s -> %s\n" : "%s%4d %d %d %8lld %s %s\n";
+		"%s%4d %d %d %8lld %s %s -> %s\n" : "%s%4d %d %d %8lld %s %s\n";
 	ft_printf(fmt,
 			long_form->file_mode,
 			file->file_infos.st_nlink,
 			file->file_infos.st_uid,
 			file->file_infos.st_gid,
 			file->file_infos.st_size,
-			adjust_time(ctime(&file->file_infos.st_mtime)),
+			adjust_time(&file->file_infos.st_mtime),
 			file->dir_entry,
 			long_form->link_path);
 }
