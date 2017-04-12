@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:56:24 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 12:06:45 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 16:49:35 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	default_functions(t_ls_param *param)
 	param->ft_loop_through_2 = btree_iter_two_param_in_order;
 	param->ft_subdir = add_to_sub_dirs_list_stat;
 	param->ft_destroy_file = dir_entry_destroy;
+	param->has_error = FALSE;
+	param->is_first = TRUE;
 }
 
 void	apply_all_files(void *param)

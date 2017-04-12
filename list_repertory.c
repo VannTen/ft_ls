@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 17:58:57 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 17:11:01 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,14 @@ void			list_dir(char *name, int path_len, struct s_ls_param *param)
 	t_fifo	*sub_dirs_list;
 	DIR		*subdir;
 
-	errno = 0;
-	ft_putchar('\n');
-	ft_putendl(name);
+	if (!param->is_first)
+		ft_putchar('\n');
+	else
+		param->is_first = FALSE;
+	if (param->put_dir_name_before)
+		ft_printf("%s:\n", name);
+	else
+		param->put_dir_name_before = TRUE;
 	subdir = opendir(name);
 	if (subdir != NULL)
 	{
@@ -115,5 +120,8 @@ void			list_dir(char *name, int path_len, struct s_ls_param *param)
 		f_fifo_destroy(&sub_dirs_list, param->ft_destroy_file);
 	}
 	else
-		perror("test");
+	{
+		perror(NULL);
+		param->has_error = TRUE;
+	}
 }

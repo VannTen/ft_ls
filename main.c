@@ -6,12 +6,13 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 14:59:24 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 17:56:05 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list_dir_interface.h"
 #include "file_defs.h"
+#include "long_format.h"
 #include "options_interface.h"
 #include "parameters_defs.h"
 #include "libft.h"
@@ -27,27 +28,30 @@ void	sort_cmd_line(const char **first_arg,
 {
 	int				index;
 	struct s_file	*file;
-	char			path[PATH_MAX];
 	char			*error_string;
 
 	index = 0;
-	ft_strcpy(path, ".");
+	ft_strcpy(param->parent_path, ".");
 	while (first_arg[index] != NULL)
 	{
 		errno = 0;
-		file = param->ft_get_file(first_arg[index], NULL, 0);
+		file = param->ft_get_file(first_arg[index], param->parent_path, 1);
 		if (file == NULL)
 		{
 			ft_asprintf(&error_string, "%s: %s: %s\n",
 					first_arg[-1], first_arg[index], strerror(errno));
 			btree_add(param->error_tree, error_string);
+			param->has_error = TRUE;
 		}
 		else
 		{
 			if (is_dir(file))
 				btree_add(sort_repos, file);
 			else
+			{
+				file->fields = check_fields(file, param->temp_fields);
 				btree_add(sort_reg_files, file);
+			}
 		}
 		index++;
 	}
@@ -81,15 +85,20 @@ int	main(int argc, const char **argv)
 	t_ls_param	*params;
 	t_btree		*file_cli;
 	t_btree		*repo_cli;
+	t_fields		fields;
 
 	params = settle_param(argc, argv);
+	params->parent_path = path;
 	if (params->options_number == USAGE_ERROR)
 		return (EXIT_FAILURE);
+	params->put_dir_name_before = argc - params->options_number > 1;
 	if (argc > params->options_number)
 	{
 		params->error_tree = btree_create(f_strcmp);
 		file_cli = btree_create(params->ft_comp);
 		repo_cli = btree_create(params->ft_comp);
+		init_fields(&fields);
+		params->temp_fields = &fields;
 		sort_cmd_line(argv + params->options_number, file_cli, repo_cli,
 				params);
 		btree_iter_in_order(params->error_tree, f_print_error_cli);
@@ -101,5 +110,5 @@ int	main(int argc, const char **argv)
 		ft_strcpy(path, ".");
 		list_dir(path, ft_strlen("."), params);
 	}
-	return (0);
+	return (params->has_error ? EXIT_FAILURE : EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 11:28:13 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 14:30:57 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 17:23:17 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	long_format_usual(struct s_file *file,
 			file->fields->hard_link,
 			file->file_infos.st_nlink,
 			file->fields->user,
-			long_form->user->pw_name,
+			file->user->pw_name,
 			file->fields->group,
-			long_form->group->gr_name,
+			file->group->gr_name,
 			file->fields->device_major,
 			has_device_nb ? 1 : 0,
 			major(file->file_infos.st_rdev),
