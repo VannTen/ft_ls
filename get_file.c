@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:04 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 13:41:09 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 19:00:46 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 char	*get_file_name(DIR *dir, t_bool take_dotfiles)
 {
 	struct dirent	*dir_entry;
+
 	dir_entry = readdir(dir);
 	while (!take_dotfiles &&
 			(dir_entry != NULL && dir_entry->d_name[0] == HIDDEN_MARK_CHAR))

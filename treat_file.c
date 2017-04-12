@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:02:53 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 17:42:18 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 18:59:05 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ static void	long_format(struct s_file *file)
 	long_form.user = NULL;
 }
 
-void	print_name_stat(void *entry)
+void		print_name_stat(void *entry)
 {
 	ft_putendl(((struct s_file*)entry)->dir_entry);
 }
 
-void	print_long_format(void *entry)
+void		print_long_format(void *entry)
 {
 	struct s_file	*file;
 

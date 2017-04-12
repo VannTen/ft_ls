@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 10:38:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 18:30:24 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 19:00:03 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static t_btree	*get_sorted_dir_entries(DIR *directory, t_ls_param *param,
 static t_fifo	*list_one_dir(DIR *directory, struct s_ls_param *param,
 		char *parent_path, int path_len)
 {
-	t_btree	*sorted_entries;
-	t_fifo	*sub_dirs_list;
-	t_fields fields;
+	t_btree		*sorted_entries;
+	t_fifo		*sub_dirs_list;
+	t_fields	fields;
 
 	sub_dirs_list = NULL;
 	init_fields(&fields);

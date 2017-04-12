@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 18:57:26 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 19:02:43 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,18 @@ static int	f_strcmp(const void *str1, const void *str2)
 	return (ft_strcmp(str1, str2));
 }
 
-static void f_print_error_cli(void *error_string)
+static void	f_print_error_cli(void *error_string)
 {
 	ft_putstr(error_string);
 }
 
-int	main(int argc, const char **argv)
+int			main(int argc, const char **argv)
 {
 	char		path[PATH_MAX];
 	t_ls_param	*params;
 	t_btree		*file_cli;
 	t_btree		*repo_cli;
-	t_fields		fields;
+	t_fields	fields;
 
 	params = settle_param(argc, argv);
 	params->parent_path = path;

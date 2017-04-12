@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 18:56:24 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 18:53:44 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/12 18:59:35 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "file_interface.h"
 #include "libft.h"
 
-void	default_functions(t_ls_param *param)
+void		default_functions(t_ls_param *param)
 {
 	param->options[ALL_FILES] = FALSE;
 	param->options[LONG_FORMAT] = FALSE;
@@ -33,11 +33,11 @@ void	default_functions(t_ls_param *param)
 	param->is_first = TRUE;
 }
 
-t_ls_param *settle_param(int arg_count, const char **arg_values)
+t_ls_param	*settle_param(int arg_count, const char **arg_values)
 {
 	static t_ls_param	params;
 	static t_bool		options[OPT_NBR];
-	const t_apply_opt		apply[OPT_NBR] = {
+	const t_apply_opt	apply[OPT_NBR] = {
 		apply_all_files,
 		apply_long_format,
 		apply_reverse_order,
