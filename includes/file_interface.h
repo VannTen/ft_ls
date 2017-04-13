@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 16:01:14 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 13:16:13 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ struct s_file;
 ** Implementation file : is_file.c
 */
 
-t_bool	is_dir(struct s_file *file);
-t_bool	is_block_or_char_file(struct s_file *file);
+t_bool	is_dir(const struct s_file *file);
+t_bool	is_block_or_char_file(const struct s_file *file);
+t_bool	is_link(const struct s_file *file);
 
 /*
 ** Print functions, also add directories to the list if recursive option is set
@@ -57,7 +58,6 @@ void	add_to_sub_dirs_list_stat(void *entry, void *list_dir);
 ** Implementation file : destroy_file.c
 */
 
-void	dir_entry_destroy(void **direntry);
 void	stat_entry_destroy(void **s_file);
 
 #endif

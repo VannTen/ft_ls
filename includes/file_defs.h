@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/11 17:55:19 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 11:40:29 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ struct s_file
 	struct stat		file_infos;
 	const char		*dir_entry;
 	char			*parent_path;
+	char			*link_path;
 	int				path_len;
 	struct passwd	*user;
 	struct group	*group;
