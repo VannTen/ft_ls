@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 19:19:50 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/13 19:49:50 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 19:57:55 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,7 @@ void		process_cmd_line_args(const char **argv,
 	btree_iter_in_order(params->error_tree, f_print_error_cli);
 	params->ft_loop_through(file_cli, params->ft_print_entry);
 	params->ft_loop_through_2(repo_cli, list_dirs, params);
+	btree_destroy(&file_cli, params->ft_destroy_file);
+	btree_destroy(&repo_cli, params->ft_destroy_file);
+	btree_destroy(&params->error_tree, ft_gen_strdel);
 }
