@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 11:28:13 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/13 15:55:41 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 19:15:59 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,18 +80,99 @@ void	long_format_usual(struct s_file *file, char *link_path)
 
 void	long_format_no_user_name(struct s_file *file, char *link_path)
 {
-	(void)file;
-	(void)link_path;
+	char	*fmt;
+	t_bool	has_device_nb;
+	char	mode_field[MODE_ARRAY_SIZE + 1];
+
+	has_device_nb = is_block_or_char_file(file);
+	fill_mode_field(mode_field, file->file_infos.st_mode);
+	fmt = mode_field[0] == 'l' ?
+		"%s  %*d %-*d %-*s %*.*d%-*.*s%*lld %s %s -> %s\n" :
+		"%s  %*d %-*d %-*s %*.*d%-*.*s%*lld %s %s\n";
+	ft_printf(fmt,
+			mode_field,
+			file->fields->hard_link,
+			file->file_infos.st_nlink,
+			file->fields->user,
+			file->file_infos.st_uid,
+			file->fields->group,
+			file->group->gr_name,
+			file->fields->device_major,
+			has_device_nb ? 1 : 0,
+			major(file->file_infos.st_rdev),
+			file->fields->device_sep,
+			has_device_nb ? 1 : 0,
+			",",
+			file->fields->device_minor,
+			has_device_nb ?
+			minor(file->file_infos.st_rdev) : file->file_infos.st_size,
+			adjust_time(&file->file_infos.st_mtime),
+			file->dir_entry,
+			link_path);
 }
 
 void	long_format_no_group_name(struct s_file *file, char *link_path)
 {
-	(void)file;
-	(void)link_path;
+	char	*fmt;
+	t_bool	has_device_nb;
+	char	mode_field[MODE_ARRAY_SIZE + 1];
+
+	has_device_nb = is_block_or_char_file(file);
+	fill_mode_field(mode_field, file->file_infos.st_mode);
+	fmt = mode_field[0] == 'l' ?
+		"%s  %*d %-*s %-*d %*.*d%-*.*s%*lld %s %s -> %s\n" :
+		"%s  %*d %-*s %-*d %*.*d%-*.*s%*lld %s %s\n";
+	ft_printf(fmt,
+			mode_field,
+			file->fields->hard_link,
+			file->file_infos.st_nlink,
+			file->fields->user,
+			file->user->pw_name,
+			file->fields->group,
+			file->file_infos.st_gid,
+			file->fields->device_major,
+			has_device_nb ? 1 : 0,
+			major(file->file_infos.st_rdev),
+			file->fields->device_sep,
+			has_device_nb ? 1 : 0,
+			",",
+			file->fields->device_minor,
+			has_device_nb ?
+			minor(file->file_infos.st_rdev) : file->file_infos.st_size,
+			adjust_time(&file->file_infos.st_mtime),
+			file->dir_entry,
+			link_path);
 }
 
 void	long_format_neither(struct s_file *file, char *link_path)
 {
-	(void)file;
-	(void)link_path;
+	char	*fmt;
+	t_bool	has_device_nb;
+	char	mode_field[MODE_ARRAY_SIZE + 1];
+
+	has_device_nb = is_block_or_char_file(file);
+	fill_mode_field(mode_field, file->file_infos.st_mode);
+	fmt = mode_field[0] == 'l' ?
+		"%s  %*d %-*d %-*d %*.*d%-*.*s%*lld %s %s -> %s\n" :
+		"%s  %*d %-*d %-*d %*.*d%-*.*s%*lld %s %s\n";
+	ft_printf(fmt,
+			mode_field,
+			file->fields->hard_link,
+			file->file_infos.st_nlink,
+			file->file_infos.st_uid,
+			file->user->pw_name,
+			file->fields->group,
+			file->file_infos.st_gid,
+			file->fields->device_major,
+			has_device_nb ? 1 : 0,
+			major(file->file_infos.st_rdev),
+			file->fields->device_sep,
+			has_device_nb ? 1 : 0,
+			",",
+			file->fields->device_minor,
+			has_device_nb ?
+			minor(file->file_infos.st_rdev) : file->file_infos.st_size,
+			adjust_time(&file->file_infos.st_mtime),
+			file->dir_entry,
+			link_path);
 }
