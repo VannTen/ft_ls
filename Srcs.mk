@@ -6,7 +6,7 @@
 #    By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/19 07:58:53 by mgautier          #+#    #+#              #
-#*   Updated: 2017/04/12 18:55:36 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/04/13 19:24:32 by mgautier         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC :=\
 	field_long_format.c\
 	is_file.c\
 	apply_options.c\
+	command_line_args.c\
 	main.c
 # Directories
 
