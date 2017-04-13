@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 15:26:39 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/13 18:21:52 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 20:13:13 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/dir.h>
 # include <stddef.h>
 
-struct s_ls_param
+struct	s_ls_param
 {
 	t_compare			ft_comp;
 	t_print				ft_print_entry;

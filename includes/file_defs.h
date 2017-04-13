@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/13 18:15:23 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 20:10:43 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <uuid/uuid.h>
 # define HIDDEN_MARK_CHAR '.'
 
-struct s_file
+struct	s_file
 {
 	struct stat		file_infos;
 	const char		*dir_entry;

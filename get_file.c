@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:04 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/13 20:06:54 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 20:10:13 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	*get_stat_dir(const char *file_name, t_ls_param *param, size_t path_len)
 	{
 		file->dir_entry = file_name;
 		errno = 0;
-			file->params = param;
-			file->path_len = path_len;
-			set_file_path(param, path_len, file_name);
-			ret_stat = lstat(param->parent_path, &file->file_infos);
-			restore_path(param, path_len);
+		file->params = param;
+		file->path_len = path_len;
+		set_file_path(param, path_len, file_name);
+		ret_stat = lstat(param->parent_path, &file->file_infos);
+		restore_path(param, path_len);
 		if (ret_stat == -1)
 			param->ft_destroy_file((void**)&file);
 	}
