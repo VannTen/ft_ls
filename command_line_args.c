@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 19:19:50 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/13 19:29:08 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 19:49:50 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,26 @@
 #include "list_dir_interface.h"
 #include <sys/errno.h>
 
-static int	f_strcmp(const void *str1, const void *str2)
-{
-	return (ft_strcmp(str1, str2));
-}
-
 static void	f_print_error_cli(void *error_string)
 {
 	ft_putstr(error_string);
 }
 
-void	sort_cmd_line(const char **first_arg,
+static void	push_error(t_ls_param *param, const char *arg)
+{
+	char			*error_string;
+
+	ft_asprintf(&error_string, "%s: %s: %s\n",
+			param->prog_name, arg, strerror(errno));
+	btree_add(param->error_tree, error_string);
+	param->has_error = TRUE;
+}
+
+static void	sort_cmd_line(const char **first_arg,
 		t_btree *sort_reg_files, t_btree *sort_repos, t_ls_param *param)
 {
 	int				index;
 	struct s_file	*file;
-	char			*error_string;
 
 	index = 0;
 	param->parent_path[0] = '\0';
@@ -40,12 +44,7 @@ void	sort_cmd_line(const char **first_arg,
 		errno = 0;
 		file = param->ft_get_file(first_arg[index], param, 0);
 		if (file == NULL)
-		{
-			ft_asprintf(&error_string, "%s: %s: %s\n",
-					param->prog_name, first_arg[index], strerror(errno));
-			btree_add(param->error_tree, error_string);
-			param->has_error = TRUE;
-		}
+			push_error(param, first_arg[index]);
 		else
 		{
 			if (is_dir(file))
@@ -72,7 +71,7 @@ static void	list_dirs(void *v_dir_file, void *v_param)
 	ft_strclr(param->parent_path);
 }
 
-void	process_cmd_line_args(const char **argv,
+void		process_cmd_line_args(const char **argv,
 		t_ls_param *params, t_fields *fields)
 {
 	t_btree		*file_cli;

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:03:15 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/10 12:03:07 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 19:50:03 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <sys/dir.h>
 #include <dirent.h>
 
-int		comp_alpha_stat(const void *entry_1, const void *entry_2)
+int	comp_alpha_stat(const void *entry_1, const void *entry_2)
 {
 	const struct s_file *file_1;
 	const struct s_file *file_2;
@@ -26,7 +26,7 @@ int		comp_alpha_stat(const void *entry_1, const void *entry_2)
 	return (ft_strcmp(file_1->dir_entry, file_2->dir_entry));
 }
 
-int		comp_time(const void *entry_1, const void *entry_2)
+int	comp_time(const void *entry_1, const void *entry_2)
 {
 	const struct s_file *file_1;
 	const struct s_file *file_2;
@@ -42,4 +42,9 @@ int		comp_time(const void *entry_1, const void *entry_2)
 		return (1);
 	else
 		return (-1);
+}
+
+int	f_strcmp(const void *str1, const void *str2)
+{
+	return (ft_strcmp(str1, str2));
 }

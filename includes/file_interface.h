@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/13 18:23:48 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 19:34:41 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		get_block_nbr(void *file);
 
 int		comp_alpha_stat(const void *entry_1, const void *entry_2);
 int		comp_time(const void *entry_1, const void *entry_2);
+int		f_strcmp(const void *str1, const void *str2);
 
 /*
 ** Get files functions
