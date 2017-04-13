@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 11:28:13 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 19:00:29 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 10:42:01 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*adjust_time(const time_t *timestamp)
 	time_t	time_of_day;
 	time_t	diff;
 
-	count_space = 0;
 	time_string = ctime(timestamp);
 	time_of_day = time(NULL);
 	index = 0;
