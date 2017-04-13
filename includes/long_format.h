@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/08 18:13:18 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 11:14:39 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 11:50:53 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,10 @@ struct s_long_form_info
 	struct group	*group;
 };
 
-void	long_format_usual(struct s_file *file,
-		struct s_long_form_info *long_form);
-void	long_format_no_user_name(struct s_file *file,
-		struct s_long_form_info *long_form);
-void	long_format_no_group_name(struct s_file *file,
-		struct s_long_form_info *long_form);
-void	long_format_neither(struct s_file *file,
-		struct s_long_form_info *long_form);
+void	long_format_usual(struct s_file *file, char *link_path);
+void	long_format_no_user_name(struct s_file *file, char *link_path);
+void	long_format_no_group_name(struct s_file *file, char *link_path);
+void	long_format_neither(struct s_file *file, char *link_path);
 
 /*
 ** Field struct functions : compare, init, fill.

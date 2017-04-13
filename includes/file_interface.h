@@ -6,14 +6,16 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 17:15:48 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/13 13:16:13 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 18:23:48 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILE_INTERFACE_H
 # define FILE_INTERFACE_H
 # include "libft.h"
+# include "parameters_interface.h"
 # include <sys/dir.h>
+# include <stddef.h>
 
 struct s_file;
 
@@ -50,7 +52,8 @@ int		comp_time(const void *entry_1, const void *entry_2);
 */
 
 char	*get_file_name(DIR *dir, t_bool take_dotfiles);
-void	*get_stat_dir(const char *file_name, char *parent_path, int path_len);
+void	*get_stat_dir(const char *file_name, t_ls_param *param,
+		size_t path_len);
 void	add_to_sub_dirs_list_stat(void *entry, void *list_dir);
 
 /*

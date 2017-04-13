@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 11:28:13 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/13 10:42:01 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 15:55:41 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,19 @@ char	*adjust_time(const time_t *timestamp)
 	return (start);
 }
 
-void	long_format_usual(struct s_file *file,
-		struct s_long_form_info *long_form)
+void	long_format_usual(struct s_file *file, char *link_path)
 {
 	char	*fmt;
 	t_bool	has_device_nb;
+	char	mode_field[MODE_ARRAY_SIZE + 1];
 
 	has_device_nb = is_block_or_char_file(file);
-	fmt = long_form->file_mode[0] == 'l' ?
+	fill_mode_field(mode_field, file->file_infos.st_mode);
+	fmt = mode_field[0] == 'l' ?
 		"%s  %*d %-*s %-*s %*.*d%-*.*s%*lld %s %s -> %s\n" :
 		"%s  %*d %-*s %-*s %*.*d%-*.*s%*lld %s %s\n";
 	ft_printf(fmt,
-			long_form->file_mode,
+			mode_field,
 			file->fields->hard_link,
 			file->file_infos.st_nlink,
 			file->fields->user,
@@ -70,63 +71,27 @@ void	long_format_usual(struct s_file *file,
 			has_device_nb ? 1 : 0,
 			",",
 			file->fields->device_minor,
-			is_block_or_char_file(file) ? minor(file->file_infos.st_rdev) :
-			file->file_infos.st_size,
+			has_device_nb ?
+			minor(file->file_infos.st_rdev) : file->file_infos.st_size,
 			adjust_time(&file->file_infos.st_mtime),
 			file->dir_entry,
-			long_form->link_path);
+			link_path);
 }
 
-void	long_format_no_user_name(struct s_file *file,
-		struct s_long_form_info *long_form)
+void	long_format_no_user_name(struct s_file *file, char *link_path)
 {
-	char *fmt;
-
-	fmt = long_form->file_mode[0] == 'l' ?
-		"%s%4d %d %s %8lld %s %s -> %s\n" : "%s%4d %d %s %8lld %s %s\n";
-	ft_printf(fmt,
-			long_form->file_mode,
-			file->file_infos.st_nlink,
-			file->file_infos.st_uid,
-			long_form->group->gr_name,
-			file->file_infos.st_size,
-			adjust_time(&file->file_infos.st_mtime),
-			file->dir_entry,
-			long_form->link_path);
+	(void)file;
+	(void)link_path;
 }
 
-void	long_format_no_group_name(struct s_file *file,
-		struct s_long_form_info *long_form)
+void	long_format_no_group_name(struct s_file *file, char *link_path)
 {
-	char *fmt;
-
-	fmt = long_form->file_mode[0] == 'l' ?
-		"%s%4d %s %d %8lld %s %s -> %s\n" : "%s%4d %s %d %8lld %s %s\n";
-	ft_printf(fmt,
-			long_form->file_mode,
-			file->file_infos.st_nlink,
-			long_form->user->pw_name,
-			file->file_infos.st_gid,
-			file->file_infos.st_size,
-			adjust_time(&file->file_infos.st_mtime),
-			file->dir_entry,
-			long_form->link_path);
+	(void)file;
+	(void)link_path;
 }
 
-void	long_format_neither(struct s_file *file,
-		struct s_long_form_info *long_form)
+void	long_format_neither(struct s_file *file, char *link_path)
 {
-	char *fmt;
-
-	fmt = long_form->file_mode[0] == 'l' ?
-		"%s%4d %d %d %8lld %s %s -> %s\n" : "%s%4d %d %d %8lld %s %s\n";
-	ft_printf(fmt,
-			long_form->file_mode,
-			file->file_infos.st_nlink,
-			file->file_infos.st_uid,
-			file->file_infos.st_gid,
-			file->file_infos.st_size,
-			adjust_time(&file->file_infos.st_mtime),
-			file->dir_entry,
-			long_form->link_path);
+	(void)file;
+	(void)link_path;
 }

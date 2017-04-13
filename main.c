@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 17:20:25 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 19:02:43 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 18:45:53 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	sort_cmd_line(const char **first_arg,
 	while (first_arg[index] != NULL)
 	{
 		errno = 0;
-		file = param->ft_get_file(first_arg[index], param->parent_path, 0);
+		file = param->ft_get_file(first_arg[index], param, 0);
 		if (file == NULL)
 		{
 			ft_asprintf(&error_string, "%s: %s: %s\n",
@@ -60,12 +60,12 @@ static void	list_dirs(void *v_dir_file, void *v_param)
 {
 	struct s_file	*dir_file;
 	t_ls_param		*param;
-	char			path[PATH_MAX];
 
 	dir_file = v_dir_file;
 	param = v_param;
-	ft_strcpy(path, dir_file->dir_entry);
-	list_dir(path, ft_strlen(dir_file->dir_entry), param);
+	ft_strcpy(param->parent_path, dir_file->dir_entry);
+	list_dir(ft_strlen(dir_file->dir_entry), param);
+	ft_strclr(param->parent_path);
 }
 
 static int	f_strcmp(const void *str1, const void *str2)
@@ -80,14 +80,17 @@ static void	f_print_error_cli(void *error_string)
 
 int			main(int argc, const char **argv)
 {
-	char		path[PATH_MAX];
 	t_ls_param	*params;
 	t_btree		*file_cli;
 	t_btree		*repo_cli;
 	t_fields	fields;
 
 	params = settle_param(argc, argv);
-	params->parent_path = path;
+	if (params == NULL)
+	{
+		perror(argv[0]);
+		return (EXIT_FAILURE);
+	}
 	params->prog_name = argv[0];
 	if (params->options_number == USAGE_ERROR)
 		return (EXIT_FAILURE);
@@ -108,8 +111,9 @@ int			main(int argc, const char **argv)
 	}
 	else
 	{
-		ft_strcpy(path, ".");
-		list_dir(path, ft_strlen("."), params);
+		ft_strcpy(params->parent_path, ".");
+		list_dir(ft_strlen("."), params);
 	}
+	ft_strdel(&params->parent_path);
 	return (params->has_error ? EXIT_FAILURE : EXIT_SUCCESS);
 }

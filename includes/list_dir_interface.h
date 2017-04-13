@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:45:56 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 18:29:08 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 17:54:09 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 # include <sys/types.h>
 # include <sys/dir.h>
 
-int	list_dir(char *name, int path_len, t_ls_param *param);
+int	list_dir(int path_len, t_ls_param *param);
 
 #endif

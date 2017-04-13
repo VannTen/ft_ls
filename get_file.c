@@ -6,18 +6,20 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:12:04 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 19:00:46 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 18:45:27 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "file_defs.h"
 #include "mode_and_perms_interface.h"
 #include "path_tools_interface.h"
+#include "parameters_defs.h"
 #include "libft.h"
 #include <sys/types.h>
 #include <sys/dir.h>
 #include <sys/errno.h>
 #include <stdio.h>
+#include <stddef.h>
 
 char	*get_file_name(DIR *dir, t_bool take_dotfiles)
 {
@@ -30,7 +32,7 @@ char	*get_file_name(DIR *dir, t_bool take_dotfiles)
 	return (dir_entry == NULL ? NULL : ft_strdup(dir_entry->d_name));
 }
 
-void	*get_stat_dir(const char *file_name, char *parent_path, int path_len)
+void	*get_stat_dir(const char *file_name, t_ls_param *param, size_t path_len)
 {
 	struct s_file	*file;
 	int				ret_stat;
@@ -42,21 +44,18 @@ void	*get_stat_dir(const char *file_name, char *parent_path, int path_len)
 	{
 		file->dir_entry = file_name;
 		errno = 0;
-		if (parent_path != NULL)
+		if (path_len != 0)
 		{
-			file->parent_path = parent_path;
+			file->params = param;
 			file->path_len = path_len;
-			set_file_path(parent_path, path_len, file_name);
-			ret_stat = lstat(parent_path, &file->file_infos);
-			restore_path(parent_path, path_len);
+			set_file_path(param, path_len, file_name);
+			ret_stat = lstat(param->parent_path, &file->file_infos);
+			restore_path(param, path_len);
 		}
 		else
 			ret_stat = lstat(file_name, &file->file_infos);
 		if (ret_stat == -1)
-		{
-			free(file);
-			file = NULL;
-		}
+			param->ft_destroy_file((void**)&file);
 	}
 	return (file);
 }

@@ -6,7 +6,7 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 15:26:39 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 18:16:42 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 18:21:52 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@
 # include "long_format.h"
 # include <sys/syslimits.h>
 # include <sys/dir.h>
+# include <stddef.h>
 
-typedef void	(*t_print)(void*);
-typedef void	*(*t_get)(const char *file_name,
-		char *parent_path, int path_len);
-typedef void	(*t_loop_through)(t_btree *entries, t_iter f);
-typedef void	(*t_loop_through_2)(t_btree *entries, t_iter_two f, void*);
 struct s_ls_param
 {
 	t_compare			ft_comp;
@@ -37,6 +33,7 @@ struct s_ls_param
 	int					options_number;
 	t_fields			*temp_fields;
 	char				*parent_path;
+	size_t				path_len_max;
 	t_bool				has_error;
 	t_bool				is_first;
 	t_bool				put_dir_name_before;

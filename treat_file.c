@@ -6,12 +6,13 @@
 /*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/03 16:02:53 by mgautier          #+#    #+#             */
-/*   Updated: 2017/04/12 18:59:05 by mgautier         ###   ########.fr       */
+/*   Updated: 2017/04/13 18:16:34 by mgautier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mode_and_perms_interface.h"
 #include "file_defs.h"
+#include "parameters_defs.h"
 #include "libft.h"
 #include "path_tools_interface.h"
 #include "long_format.h"
@@ -21,38 +22,39 @@
 #include <dirent.h>
 #include <time.h>
 
-static void	pop_long_format(struct s_file *file,
-		struct s_long_form_info *long_form)
+static void	pop_long_format(struct s_file *file, char *link_path,
+		t_ls_param *param)
 {
-	fill_mode_field(long_form->file_mode, file->file_infos.st_mode);
-	long_form->user = getpwuid(file->file_infos.st_uid);
-	long_form->group = getgrgid(file->file_infos.st_gid);
-	if (long_form->file_mode[0] == 'l')
+	int	ret_read_link;
+
+	file->user = getpwuid(file->file_infos.st_uid);
+	file->group = getgrgid(file->file_infos.st_gid);
+	if (is_link(file))
 	{
-		set_file_path(
-				file->parent_path, file->path_len, file->dir_entry);
-		long_form->link_path[readlink(
-				file->parent_path, long_form->link_path, PATH_MAX)] = '\0';
-		restore_path(file->parent_path, file->path_len);
+		set_file_path(param, file->path_len, file->dir_entry);
+		ret_read_link = readlink(param->parent_path, link_path, PATH_MAX);
+		if (ret_read_link != -1)
+			link_path[ret_read_link] = '\0';
+		restore_path(param, file->path_len);
 	}
 	else
-		long_form->link_path[0] = '\0';
+		link_path[0] = '\0';
 }
 
 static void	long_format(struct s_file *file)
 {
-	struct s_long_form_info long_form;
+	char	link_path[PATH_MAX];
 
-	pop_long_format(file, &long_form);
-	if (long_form.user != NULL && long_form.group != NULL)
-		long_format_usual(file, &long_form);
-	else if (long_form.group != NULL)
-		long_format_no_user_name(file, &long_form);
-	else if (long_form.user != NULL)
-		long_format_no_group_name(file, &long_form);
+	pop_long_format(file, link_path, file->params);
+	if (file->user != NULL && file->group != NULL)
+		long_format_usual(file, link_path);
+	else if (file->group != NULL)
+		long_format_no_user_name(file, link_path);
+	else if (file->user != NULL)
+		long_format_no_group_name(file, link_path);
 	else
-		long_format_neither(file, &long_form);
-	long_form.user = NULL;
+		long_format_neither(file, link_path);
+	link_path[0] = '\0';
 }
 
 void		print_name_stat(void *entry)
